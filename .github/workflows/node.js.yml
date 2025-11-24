@@ -33,3 +33,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
 
+    - uses: actions/upload-artifact@v4
+      with:
+        name: my-build-output
+        path: ./dist/
