@@ -36,7 +36,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: my-build-output
-        path: ./dist/
+        path: .
     - name: Aqua Security Trivy Scan
       uses: aquasecurity/trivy-action@0.33.1
       with:
