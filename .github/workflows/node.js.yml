@@ -38,10 +38,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm run lint -- --quiet || true
+        run: npm install
 
       - name: Build the dependencies
-        run: npm run build
+        #run: npm run build
+        run: react-scripts build
 
       - name: upload build artifacts
         uses: actions/upload-artifact@v4
