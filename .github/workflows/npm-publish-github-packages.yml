@@ -71,3 +71,5 @@ jobs:
           ssh -i ~/.ssh/deploy-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
           "cd /var/www/myapp && pm2 restart all"     
 
+
+
