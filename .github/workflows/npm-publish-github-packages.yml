@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install
+      - run: pwd
      # - run: npm run build --if-present
       - run: CI=false npm run build --if-present
       
@@ -40,7 +41,7 @@ jobs:
         with:
           name: critical-asset-admin-frontend-$date
           path: /
-
+      - run: pwd
 
 
 
