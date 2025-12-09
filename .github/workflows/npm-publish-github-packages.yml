@@ -65,7 +65,7 @@ jobs:
 
       - name: Copy build files to EC2 server
         run: |
-          scp -i ~/.ssh/deploy-key.pem -r ././artifact-files/* \
+          scp -i ~/.ssh/deploy-key.pem -r ./artifact-files/* \
           ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/html/
 
       - name: Restart app on EC2
