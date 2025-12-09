@@ -41,7 +41,7 @@ jobs:
           path: build/       # <-- Change to your actual output folder
 
   deploy:
-    euns-on: ubuntu-24.04
+    runs-on: ubuntu-24.04
     needs: build
     steps:
       - name: Download build artifact
