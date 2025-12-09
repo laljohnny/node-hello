@@ -21,6 +21,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    environment: envdev
 
     steps:
       - uses: actions/checkout@v4
@@ -36,10 +37,37 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v5
         with:
-          name: node-app-artifact
+          name: node-app-artifact-$date
           path: build/       # <-- Change to your actual output folder
 
+  deploy:
+    euns-on: ubuntu-24.04
+    needs: build
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: node-app-artifact-$date
+          path: ./artifact-files
+
+      - name: Show downloaded files
+        run: ls -R ./artifact-files
 
 
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy-key.pem
+          chmod 600 ~/.ssh/deploy-key.pem
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Copy build files to EC2 server
+        run: |
+          scp -i ~/.ssh/deploy-key.pem -r ./artifact/* \
+          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/myapp/
+
+      - name: Restart app on EC2
+        run: |
+          ssh -i ~/.ssh/deploy-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+          "cd /var/www/myapp && pm2 restart all"     
 
