@@ -72,7 +72,6 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
           "sudo systemctl restart apache2"
-          "sudo systemctl status apache2"
 
 
 
