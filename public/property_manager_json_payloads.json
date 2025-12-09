@@ -1,0 +1,366 @@
+{
+  "property_manager_dashboard": {
+    "user_context": {
+      "user_id": "USR-pm-001",
+      "tenant_id": "tenant_001",
+      "property_ids": ["PROP-DOWNTOWN-01", "PROP-RIVERSIDE-02"],
+      "timestamp": "2025-08-11T07:00:00Z",
+      "timezone": "America/New_York"
+    },
+    
+    "panel_1_critical_alerts": {
+      "panel_id": "critical_alerts_emergency_status",
+      "title": "Critical Alerts & Emergency Status",
+      "priority": 1,
+      "refresh_interval_seconds": 30,
+      "data": {
+        "summary": {
+          "total_active_alerts": 3,
+          "emergency_count": 1,
+          "critical_count": 1,
+          "security_count": 1,
+          "system_failure_count": 0
+        },
+        "alerts": [
+          {
+            "alert_id": "ALT-2025-08-11-001",
+            "property_id": "PROP-DOWNTOWN-01",
+            "property_name": "Downtown Office Complex",
+            "timestamp": "2025-08-11T06:45:23Z",
+            "alert_type": "EMERGENCY",
+            "severity_level": 1,
+            "title": "HVAC System Complete Failure - Building A",
+            "description": "Main HVAC unit offline, temperature rising rapidly, 200+ tenants affected",
+            "affected_areas": ["Floor 1-5", "Conference Rooms", "Main Lobby"],
+            "estimated_impact": "High - 200 tenants affected, potential revenue loss $15K/day",
+            "status": "IN_PROGRESS",
+            "assigned_to": "John Smith",
+            "assigned_to_phone": "+1-555-1001",
+            "eta_resolution": "2025-08-11T10:00:00Z",
+            "escalation_level": 2,
+            "action_required": "Emergency HVAC vendor contacted, backup systems activated, tenant notifications sent",
+            "data_source": "IoT_SENSORS",
+            "contact_info": {
+              "vendor": "HVAC Solutions Inc",
+              "phone": "+1-555-0123",
+              "technician": "Bob Wilson",
+              "eta": "09:30"
+            },
+            "time_since_alert": "75 minutes",
+            "urgency_indicator": "IMMEDIATE"
+          },
+          {
+            "alert_id": "ALT-2025-08-11-002",
+            "property_id": "PROP-DOWNTOWN-01",
+            "timestamp": "2025-08-11T07:15:45Z",
+            "alert_type": "SECURITY",
+            "severity_level": 3,
+            "title": "Security Camera Offline - Floor 3",
+            "description": "Main security camera in lobby area offline for 45 minutes",
+            "affected_areas": ["Floor 3 Main Lobby"],
+            "estimated_impact": "Medium - Security monitoring gap, no immediate tenant impact",
+            "status": "ACKNOWLEDGED",
+            "assigned_to": "Security Team",
+            "eta_resolution": "2025-08-11T14:00:00Z",
+            "escalation_level": 1,
+            "action_required": "Security vendor notified, temporary coverage arranged",
+            "data_source": "SECURITY_SYSTEM",
+            "contact_info": {
+              "vendor": "SecureWatch Pro",
+              "phone": "+1-555-0789"
+            },
+            "time_since_alert": "45 minutes",
+            "urgency_indicator": "MONITOR"
+          }
+        ],
+        "emergency_readiness": {
+          "backup_systems_status": "ONLINE",
+          "emergency_contacts_available": true,
+          "vendor_response_confirmed": "2_OF_3_CONFIRMED",
+          "evacuation_procedures_ready": true
+        }
+      }
+    },
+
+    "panel_2_work_orders": {
+      "panel_id": "work_order_pipeline_resources",
+      "title": "Today's Work Order Pipeline & Resource Allocation",
+      "priority": 2,
+      "refresh_interval_seconds": 300,
+      "data": {
+        "summary": {
+          "total_work_orders_today": 8,
+          "overdue_count": 1,
+          "in_progress_count": 3,
+          "scheduled_count": 4,
+          "technician_utilization_pct": 75,
+          "budget_utilized_today": 3200.00,
+          "budget_planned_today": 3850.00
+        },
+        "work_orders": [
+          {
+            "work_order_id": "WO-2025-08-11-0001",
+            "property_id": "PROP-DOWNTOWN-01",
+            "title": "Emergency Elevator Repair - Building A Main",
+            "priority": "EMERGENCY",
+            "category": "EMERGENCY",
+            "status": "OVERDUE",
+            "scheduled_date": "2025-08-10",
+            "scheduled_time": "14:00:00",
+            "estimated_duration": 240,
+            "assigned_technician": "Mike Chen (TECH-001)",
+            "technician_skills": ["ELEVATORS", "Mechanical", "Safety_Certified"],
+            "technician_status": "AVAILABLE",
+            "team_size": 2,
+            "location_detail": "Building A, Main Elevator Bank, Unit 1",
+            "parts_required": [
+              {"part": "Elevator Motor Controller", "qty": 1, "status": "IN_STOCK"},
+              {"part": "Safety Cable", "qty": 2, "status": "ORDERED"}
+            ],
+            "tools_required": ["Specialized Elevator Tools", "Safety Harness", "Multimeter"],
+            "vendor_involved": "Elevator Services Pro",
+            "vendor_eta": "2025-08-11T09:30:00Z",
+            "tenant_impact": "HIGH",
+            "access_requirements": "Building manager escort required, tenant notifications sent",
+            "completion_percentage": 0,
+            "notes": "Waiting for specialized parts delivery, vendor confirmed 9:30 AM arrival",
+            "due_date": "2025-08-10T18:00:00Z",
+            "cost_estimate": 1200.00,
+            "actual_cost": 0.00,
+            "sla_status": "BREACHED",
+            "overdue_hours": 15
+          },
+          {
+            "work_order_id": "WO-2025-08-11-0002",
+            "property_id": "PROP-DOWNTOWN-01",
+            "title": "HVAC Filter Replacement - Floor 3",
+            "priority": "MEDIUM",
+            "category": "PREVENTIVE",
+            "status": "IN_PROGRESS",
+            "scheduled_date": "2025-08-11",
+            "scheduled_time": "09:00:00",
+            "estimated_duration": 120,
+            "assigned_technician": "John Smith (TECH-002), Sarah Lee (TECH-003)",
+            "technician_skills": ["HVAC", "Preventive_Maintenance"],
+            "team_size": 2,
+            "location_detail": "Floor 3, Room 315, Main HVAC Unit",
+            "parts_required": [
+              {"part": "HVAC Filter - High Efficiency", "qty": 4, "status": "IN_STOCK"}
+            ],
+            "tools_required": ["Screwdriver Set", "Cleaning Supplies"],
+            "vendor_involved": null,
+            "tenant_impact": "MINIMAL",
+            "access_requirements": "Standard access, brief noise during installation",
+            "completion_percentage": 75,
+            "notes": "75% complete, final filter installation in progress",
+            "due_date": "2025-08-11T11:00:00Z",
+            "cost_estimate": 450.00,
+            "actual_cost": 425.00,
+            "eta_completion": "2025-08-11T10:45:00Z"
+          },
+          {
+            "work_order_id": "WO-2025-08-11-0003",
+            "property_id": "PROP-DOWNTOWN-01",
+            "title": "Plumbing Inspection - Floors 1-2",
+            "priority": "LOW",
+            "category": "INSPECTION",
+            "status": "PENDING_PARTS",
+            "scheduled_date": "2025-08-11",
+            "scheduled_time": "14:00:00",
+            "estimated_duration": 180,
+            "assigned_technician": null,
+            "technician_skills": ["Plumbing", "Inspection_Certified"],
+            "team_size": 1,
+            "location_detail": "Floors 1-2, All Restroom Facilities",
+            "parts_required": [],
+            "tools_required": ["Inspection Camera", "Pressure Gauge"],
+            "vendor_involved": null,
+            "tenant_impact": "NONE",
+            "access_requirements": "Coordinate with tenants for restroom access",
+            "completion_percentage": 0,
+            "notes": "CONFLICT: All qualified technicians assigned to higher priority work",
+            "due_date": "2025-08-11T17:00:00Z",
+            "cost_estimate": 200.00,
+            "actual_cost": 0.00,
+            "conflict_reason": "NO_TECHNICIAN_AVAILABLE",
+            "suggested_reschedule": "2025-08-12T09:00:00Z"
+          }
+        ],
+        "resource_utilization": {
+          "technicians": {
+            "total_available": 8,
+            "currently_assigned": 6,
+            "utilization_percentage": 75,
+            "on_break": 1,
+            "off_duty": 1
+          },
+          "parts_inventory": {
+            "total_items_tracked": 150,
+            "items_in_stock": 142,
+            "critical_low_items": 2,
+            "items_on_order": 6
+          },
+          "vendor_coordination": {
+            "appointments_scheduled": 3,
+            "vendors_confirmed": 2,
+            "vendors_delayed": 1,
+            "emergency_vendors_on_call": 5
+          },
+          "budget_tracking": {
+            "daily_budget_planned": 3850.00,
+            "actual_spent": 2425.00,
+            "remaining_budget": 1425.00,
+            "utilization_percentage": 62.98
+          }
+        }
+      }
+    },
+
+    "panel_3_asset_performance": {
+      "panel_id": "asset_performance_predictive_maintenance",
+      "title": "Asset Performance & Predictive Maintenance Intelligence",
+      "priority": 3,
+      "refresh_interval_seconds": 3600,
+      "data": {
+        "summary": {
+          "total_assets_monitored": 47,
+          "healthy_assets": 38,
+          "warning_assets": 6,
+          "critical_assets": 3,
+          "avg_portfolio_health": 84.2,
+          "ai_predictions_generated": 12,
+          "potential_cost_savings": 23400.00,
+          "energy_efficiency_avg": 87.5
+        },
+        "assets": [
+          {
+            "asset_id": "AST-HVAC-B1-001",
+            "asset_name": "Main HVAC Unit - Building A",
+            "property_id": "PROP-DOWNTOWN-01",
+            "asset_type": "HVAC",
+            "location_detail": "Building A, Roof Level, Unit 1",
+            "current_status": "CRITICAL",
+            "health_score": 45,
+            "performance_trend": "DECLINING",
+            "efficiency_rating": 67.5,
+            "baseline_efficiency": 92.0,
+            "efficiency_variance": -24.5,
+            "energy_consumption_current": 285.7,
+            "energy_consumption_baseline": 220.3,
+            "energy_variance_pct": 29.7,
+            "temperature_reading": 78.5,
+            "pressure_reading": 12.8,
+            "vibration_level": 3.2,
+            "runtime_hours_today": 20.5,
+            "last_maintenance_date": "2025-07-15",
+            "next_scheduled_maintenance": "2025-09-15",
+            "predicted_failure_date": "2025-08-25",
+            "failure_probability": 78.5,
+            "predicted_failure_type": "Motor Bearing Wear",
+            "maintenance_priority": "IMMEDIATE",
+            "cost_impact_prediction": 8500.00,
+            "preventive_cost_estimate": 1200.00,
+            "roi_preventive_action": 7.08,
+            "anomaly_detected": true,
+            "anomaly_description": "Temperature 15°F above normal, vibration levels elevated for 3 consecutive days",
+            "anomaly_severity": "CRITICAL",
+            "recommended_action": "Schedule emergency motor bearing replacement within 48 hours",
+            "action_urgency": "IMMEDIATE",
+            "vendor_recommendation": "HVAC Solutions Inc",
+            "parts_required_prediction": [
+              {"part": "Motor Bearing Assembly", "confidence": 90},
+              {"part": "Cooling Fan", "confidence": 65}
+            ],
+            "ai_confidence_score": 92,
+            "warranty_status": "ACTIVE",
+            "compliance_status": "COMPLIANT",
+            "days_until_failure": 14
+          },
+          {
+            "asset_id": "AST-ELEV-001",
+            "asset_name": "Main Elevator - Building A",
+            "property_id": "PROP-DOWNTOWN-01",
+            "asset_type": "ELEVATORS",
+            "location_detail": "Building A, Main Elevator Bank",
+            "current_status": "WARNING",
+            "health_score": 72,
+            "performance_trend": "DECLINING",
+            "efficiency_rating": 89.0,
+            "baseline_efficiency": 95.0,
+            "energy_consumption_current": 145.2,
+            "energy_consumption_baseline": 130.0,
+            "energy_variance_pct": 11.7,
+            "runtime_hours_today": 16.0,
+            "last_maintenance_date": "2025-06-01",
+            "next_scheduled_maintenance": "2025-09-01",
+            "predicted_failure_date": "2025-11-15",
+            "failure_probability": 35.2,
+            "predicted_failure_type": "Cable Tension System",
+            "maintenance_priority": "MEDIUM",
+            "cost_impact_prediction": 12000.00,
+            "preventive_cost_estimate": 800.00,
+            "roi_preventive_action": 15.0,
+            "anomaly_detected": true,
+            "anomaly_description": "Energy consumption 12% above baseline, slight increase in travel time",
+            "anomaly_severity": "MODERATE",
+            "recommended_action": "Schedule comprehensive inspection within 4 weeks",
+            "action_urgency": "THIS_MONTH",
+            "vendor_recommendation": "Elevator Services Pro",
+            "ai_confidence_score": 78,
+            "warranty_status": "ACTIVE",
+            "compliance_status": "DUE_INSPECTION",
+            "days_until_failure": 96
+          },
+          {
+            "asset_id": "AST-HVAC-B2-002",
+            "asset_name": "Secondary HVAC - Building A",
+            "property_id": "PROP-DOWNTOWN-01",
+            "asset_type": "HVAC",
+            "location_detail": "Building A, Floor 10, Unit 2",
+            "current_status": "HEALTHY",
+            "health_score": 94,
+            "performance_trend": "IMPROVING",
+            "efficiency_rating": 96.0,
+            "baseline_efficiency": 92.0,
+            "energy_consumption_current": 195.8,
+            "energy_consumption_baseline": 210.0,
+            "energy_variance_pct": -6.8,
+            "temperature_reading": 68.2,
+            "runtime_hours_today": 18.0,
+            "last_maintenance_date": "2025-07-01",
+            "next_scheduled_maintenance": "2025-12-01",
+            "predicted_failure_date": "2026-06-15",
+            "failure_probability": 8.5,
+            "maintenance_priority": "LOW",
+            "cost_impact_prediction": 4500.00,
+            "preventive_cost_estimate": 400.00,
+            "roi_preventive_action": 11.25,
+            "anomaly_detected": false,
+            "recommended_action": "Continue standard monitoring, no intervention needed",
+            "action_urgency": "NEXT_QUARTER",
+            "ai_confidence_score": 95,
+            "warranty_status": "ACTIVE",
+            "compliance_status": "COMPLIANT",
+            "days_until_failure": 308
+          }
+        ],
+        "portfolio_intelligence": {
+          "total_assets": 47,
+          "ai_predictions": 12,
+          "cost_savings_potential": 23400.00,
+          "energy_efficiency_trend": "IMPROVING",
+          "compliance_percentage": 94.0,
+          "inspections_due_30_days": 3,
+          "predictive_maintenance_opportunities": 8,
+          "emergency_repairs_prevented": 2
+        },
+        "ai_insights": {
+          "top_recommendation": "Prioritize HVAC-B1-001 motor bearing replacement to prevent $8,500 emergency repair",
+          "cost_optimization": "Implementing all AI recommendations could save $23,400 in emergency repairs",
+          "efficiency_trend": "Portfolio energy efficiency improved 2.3% vs last month",
+          "risk_assessment": "3 assets require immediate attention, 6 assets trending toward issues"
+        }
+      }
+    }
+  }
+}

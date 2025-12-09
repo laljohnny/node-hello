@@ -1,0 +1,13 @@
+import { Icon, IconProps } from "@chakra-ui/react";
+
+const TilesView = (props: IconProps & any) => (
+  <Icon fill="currentColor" boxSize="6" viewBox="0 0 24 24" {...props}>
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M10 8V5C10 3.89543 9.10457 3 8 3H5C3.89543 3 3 3.89543 3 5V8C3 9.10457 3.89543 10 5 10H8C9.10457 10 10 9.10457 10 8ZM16 3H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H16C14.8954 10 14 9.10457 14 8V5C14 3.89543 14.8954 3 16 3ZM8 14H5C3.89543 14 3 14.8954 3 16V19C3 20.1046 3.89543 21 5 21H8C9.10457 21 10 20.1046 10 19V16C10 14.8954 9.10457 14 8 14ZM16 14H19C20.1046 14 21 14.8954 21 16V19C21 20.1046 20.1046 21 19 21H16C14.8954 21 14 20.1046 14 19V16C14 14.8954 14.8954 14 16 14Z"
+    />
+  </Icon>
+);
+
+export default TilesView;

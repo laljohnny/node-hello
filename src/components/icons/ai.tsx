@@ -1,0 +1,13 @@
+import { Icon, IconProps } from "@chakra-ui/react";
+import React from "react";
+
+const AI = (props: IconProps & any) => (
+  <Icon fill="currentColor" viewBox="0 0 24 24" boxSize="24px" {...props}>
+    <path
+      opacity=".8"
+      d="M19 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16h-4.83l-.59.59L12 20.17l-1.59-1.59-.58-.58H5V4h14v14zm-7-1l1.88-4.12L18 11l-4.12-1.88L12 5l-1.88 4.12L6 11l4.12 1.88z"
+    />
+  </Icon>
+);
+
+export default AI;

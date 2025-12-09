@@ -1,0 +1,643 @@
+{
+  "executive_dashboard": {
+    "user_context": {
+      "user_id": "USR-exec-001",
+      "tenant_id": "tenant_001",
+      "portfolio_scope": "ALL_PROPERTIES",
+      "timestamp": "2025-08-11T07:00:00Z",
+      "timezone": "America/New_York",
+      "reporting_period": "2025-08"
+    },
+
+    "panel_1_financial_health": {
+      "panel_id": "portfolio_financial_health_risk",
+      "title": "Portfolio Financial Health & Risk Exposure",
+      "priority": 1,
+      "refresh_interval_seconds": 3600,
+      "data": {
+        "real_time_performance": {
+          "portfolio_noi": {
+            "current": 2400000.00,
+            "budget": 2210000.00,
+            "variance_pct": 8.6,
+            "trend": "POSITIVE"
+          },
+          "total_revenue": {
+            "current": 3800000.00,
+            "budget": 3650000.00,
+            "variance_pct": 4.1,
+            "trend": "POSITIVE"
+          },
+          "operating_expenses": {
+            "current": 1400000.00,
+            "budget": 1440000.00,
+            "variance_pct": -2.8,
+            "trend": "FAVORABLE"
+          },
+          "roi_percentage": 12.3,
+          "occupancy_rate_pct": 94.2,
+          "occupancy_change_pct": 2.1,
+          "rent_per_sqft": 45.50,
+          "market_performance_vs_benchmark_pct": 8.5
+        },
+        "budget_variance_analysis": {
+          "maintenance_costs": {
+            "actual": 485000.00,
+            "budget": 430000.00,
+            "variance_pct": 12.8,
+            "variance_amount": 55000.00,
+            "status": "OVER_BUDGET",
+            "explanation": "Emergency HVAC repairs and elevator maintenance"
+          },
+          "energy_costs": {
+            "actual": 325000.00,
+            "budget": 298000.00,
+            "variance_pct": 9.1,
+            "variance_amount": 27000.00,
+            "status": "OVER_BUDGET",
+            "explanation": "Aging HVAC systems reducing efficiency"
+          },
+          "capex_utilization": {
+            "utilized": 1650000.00,
+            "allocated": 2540000.00,
+            "utilization_pct": 65.0,
+            "remaining": 890000.00,
+            "status": "UNDER_UTILIZED"
+          },
+          "vendor_costs": {
+            "actual": 275000.00,
+            "budget": 260000.00,
+            "variance_pct": 5.8,
+            "variance_amount": 15000.00,
+            "status": "SLIGHTLY_OVER"
+          }
+        },
+        "risk_assessment": {
+          "portfolio_risk_score": 25,
+          "risk_category": "LOW",
+          "compliance_percentage": 94.0,
+          "active_violations": 0,
+          "audit_findings": 2,
+          "insurance_claims_ytd": 1,
+          "debt_service_coverage_ratio": 1.8,
+          "loan_to_value_ratio": 65.5,
+          "tenant_payment_risk_score": 15,
+          "market_risk_score": 35,
+          "lease_expiry_risk_12m_pct": 23.5
+        },
+        "investment_performance": {
+          "portfolio_value": 47200000.00,
+          "value_appreciation_ytd_pct": 3.8,
+          "cash_flow_monthly": 420000.00,
+          "cash_reserves": 2100000.00,
+          "days_cash_on_hand": 180,
+          "liquidity_ratio": 2.5,
+          "market_position": "TOP_QUARTILE",
+          "esg_score": 78,
+          "sustainability_investment": 245000.00
+        },
+        "ai_financial_insights": {
+          "cost_optimization_opportunities": [
+            {
+              "opportunity": "LED lighting upgrade across portfolio",
+              "estimated_savings_annual": 156000.00,
+              "implementation_cost": 320000.00,
+              "roi_years": 2.1,
+              "confidence": 92
+            },
+            {
+              "opportunity": "HVAC system modernization",
+              "estimated_savings_annual": 285000.00,
+              "implementation_cost": 850000.00,
+              "roi_years": 3.0,
+              "confidence": 88
+            }
+          ],
+          "risk_predictions": [
+            {
+              "risk_type": "Maintenance Cost Escalation",
+              "probability_pct": 67,
+              "impact_estimate": 125000.00,
+              "mitigation": "Accelerate preventive maintenance program"
+            },
+            {
+              "risk_type": "Energy Cost Volatility",
+              "probability_pct": 45,
+              "impact_estimate": 85000.00,
+              "mitigation": "Lock in energy contracts, improve efficiency"
+            }
+          ],
+          "market_opportunities": [
+            {
+              "opportunity": "Rent optimization in Building A",
+              "revenue_potential_annual": 180000.00,
+              "market_rent_gap_pct": -5.2,
+              "implementation_timeline": "Q4 2025"
+            }
+          ]
+        }
+      }
+    },
+
+    "panel_2_strategic_kpis": {
+      "panel_id": "strategic_kpi_performance_market",
+      "title": "Strategic KPI Performance & Market Position",
+      "priority": 2,
+      "refresh_interval_seconds": 86400,
+      "data": {
+        "operational_efficiency": {
+          "portfolio_wide_metrics": {
+            "operating_expense_ratio": 36.8,
+            "industry_benchmark": 42.1,
+            "performance_vs_benchmark_pct": -12.6,
+            "rank_vs_peers": "TOP_DECILE"
+          },
+          "maintenance_efficiency": {
+            "cost_per_sqft": 4.85,
+            "industry_average": 5.40,
+            "efficiency_score": 90,
+            "preventive_vs_reactive_ratio": 3.2
+          },
+          "energy_performance": {
+            "energy_cost_per_sqft": 3.25,
+            "portfolio_energy_efficiency": 87.5,
+            "carbon_footprint_reduction_ytd_pct": 8.3,
+            "energy_star_score_avg": 82
+          }
+        },
+        "tenant_satisfaction": {
+          "overall_satisfaction_score": 4.2,
+          "response_rate_pct": 78.5,
+          "net_promoter_score": 45,
+          "retention_rate_pct": 89.2,
+          "satisfaction_trend": "IMPROVING",
+          "key_satisfaction_drivers": [
+            {"factor": "Maintenance Response Time", "score": 4.5},
+            {"factor": "Building Cleanliness", "score": 4.3},
+            {"factor": "HVAC Comfort", "score": 3.8},
+            {"factor": "Security", "score": 4.4}
+          ]
+        },
+        "market_positioning": {
+          "market_share_pct": 12.8,
+          "competitive_ranking": 3,
+          "rent_premium_vs_market_pct": 8.5,
+          "occupancy_vs_market": {
+            "portfolio_occupancy": 94.2,
+            "market_average": 87.6,
+            "advantage_pct": 6.6
+          },
+          "asset_quality_score": 88,
+          "brand_recognition_score": 72
+        },
+        "growth_metrics": {
+          "revenue_growth_ytd_pct": 6.8,
+          "noi_growth_ytd_pct": 8.6,
+          "same_store_growth_pct": 4.2,
+          "new_lease_spreads_pct": 12.3,
+          "renewal_spreads_pct": 4.7,
+          "development_pipeline_value": 15600000.00
+        },
+        "board_presentation_metrics": {
+          "key_highlights": [
+            "Portfolio NOI exceeds budget by 8.6% YTD",
+            "Occupancy rate 6.6% above market average",
+            "Operating efficiency in top decile vs peers",
+            "Tenant satisfaction improved to 4.2/5.0"
+          ],
+          "areas_of_focus": [
+            "HVAC system modernization program",
+            "Lease renewal negotiations for 2026",
+            "ESG initiative expansion",
+            "Market expansion opportunities"
+          ],
+          "upcoming_milestones": [
+            {"milestone": "Q3 Board Meeting", "date": "2025-09-15"},
+            {"milestone": "Annual Investor Conference", "date": "2025-10-22"},
+            {"milestone": "Sustainability Report Publication", "date": "2025-11-01"}
+          ]
+        }
+      }
+    },
+
+    "panel_3_ai_insights": {
+      "panel_id": "ai_strategic_insights_predictive",
+      "title": "AI-Driven Strategic Insights & Predictive Analytics",
+      "priority": 3,
+      "refresh_interval_seconds": 86400,
+      "data": {
+        "investment_optimization": {
+          "portfolio_optimization_score": 84,
+          "ai_recommendations": [
+            {
+              "recommendation_id": "AI-REC-001",
+              "type": "CAPITAL_ALLOCATION",
+              "title": "Accelerate HVAC Modernization Program",
+              "description": "AI analysis indicates 40% of portfolio HVAC systems underperforming, causing 15% energy inefficiency",
+              "financial_impact": {
+                "investment_required": 2400000.00,
+                "annual_savings": 780000.00,
+                "payback_period_years": 3.1,
+                "npv_10_year": 3250000.00,
+                "irr_pct": 28.5
+              },
+              "urgency": "HIGH",
+              "confidence_score": 91,
+              "implementation_timeline": "Q4 2025 - Q2 2026"
+            },
+            {
+              "recommendation_id": "AI-REC-002",
+              "type": "ASSET_OPTIMIZATION",
+              "title": "Building A Repositioning Strategy",
+              "description": "Market analysis suggests 25% rent premium achievable with amenity upgrades",
+              "financial_impact": {
+                "investment_required": 1200000.00,
+                "annual_revenue_increase": 450000.00,
+                "payback_period_years": 2.7,
+                "asset_value_increase": 3600000.00
+              },
+              "urgency": "MEDIUM",
+              "confidence_score": 87,
+              "implementation_timeline": "Q1 2026"
+            }
+          ],
+          "predictive_maintenance_roi": {
+            "total_savings_potential": 1250000.00,
+            "prevention_vs_reactive_cost_ratio": 4.2,
+            "assets_flagged_for_intervention": 12,
+            "emergency_repairs_prevented_ytd": 8
+          }
+        },
+        "market_intelligence": {
+          "market_trend_analysis": {
+            "rental_rate_forecast_12m_pct": 4.2,
+            "occupancy_forecast_12m_pct": 91.5,
+            "cap_rate_trend": "COMPRESSING",
+            "new_supply_impact": "MODERATE",
+            "demand_drivers": ["Tech sector growth", "Return-to-office trend", "Infrastructure investment"]
+          },
+          "competitive_intelligence": {
+            "new_competitors": 2,
+            "market_share_at_risk_pct": 3.2,
+            "competitive_advantages": [
+              "Superior maintenance response times",
+              "Energy efficiency leadership",
+              "Prime location portfolio"
+            ],
+            "threats": [
+              "New Class A development nearby",
+              "Aggressive competitor pricing"
+            ]
+          },
+          "expansion_opportunities": [
+            {
+              "market": "Austin Tech Corridor",
+              "opportunity_score": 88,
+              "investment_required": 25000000.00,
+              "projected_roi_pct": 16.8,
+              "risk_level": "MEDIUM"
+            },
+            {
+              "market": "Miami Financial District",
+              "opportunity_score": 76,
+              "investment_required": 18500000.00,
+              "projected_roi_pct": 14.2,
+              "risk_level": "MEDIUM_HIGH"
+            }
+          ]
+        },
+        "risk_analytics": {
+          "portfolio_risk_modeling": {
+            "value_at_risk_95_confidence": 2850000.00,
+            "stress_test_scenarios": [
+              {
+                "scenario": "Economic Recession",
+                "probability_pct": 25,
+                "noi_impact_pct": -15.2,
+                "occupancy_impact_pct": -8.5,
+                "mitigation_strategies": ["Flexible lease terms", "Cost reduction program"]
+              },
+              {
+                "scenario": "Interest Rate Shock",
+                "probability_pct": 35,
+                "noi_impact_pct": -5.8,
+                "refinancing_impact": 285000.00,
+                "mitigation_strategies": ["Fixed rate conversions", "Debt reduction"]
+              },
+              {
+                "scenario": "Major Tenant Default",
+                "probability_pct": 15,
+                "noi_impact_pct": -12.3,
+                "revenue_at_risk": 1250000.00,
+                "mitigation_strategies": ["Tenant diversification", "Credit enhancement"]
+              }
+            ]
+          },
+          "early_warning_indicators": [
+            {
+              "indicator": "Tenant Payment Delays",
+              "current_value": 2.3,
+              "threshold": 5.0,
+              "status": "NORMAL",
+              "trend": "STABLE"
+            },
+            {
+              "indicator": "Market Rent Divergence",
+              "current_value": -5.2,
+              "threshold": -10.0,
+              "status": "MONITOR",
+              "trend": "IMPROVING"
+            },
+            {
+              "indicator": "Maintenance Cost Escalation",
+              "current_value": 12.8,
+              "threshold": 15.0,
+              "status": "CAUTION",
+              "trend": "INCREASING"
+            }
+          ]
+        },
+        "ai_executive_summary": {
+          "daily_executive_brief": "Portfolio performing 8.6% above NOI budget. AI recommends accelerating HVAC modernization for $780K annual savings. Market conditions favorable for rent optimization in Q4. Monitor maintenance cost escalation approaching threshold.",
+          "strategic_priorities": [
+            {
+              "priority": "Implement AI-recommended HVAC modernization",
+              "timeline": "Q4 2025",
+              "expected_impact": "$780K annual savings",
+              "confidence": 91
+            },
+            {
+              "priority": "Execute Building A repositioning strategy",
+              "timeline": "Q1 2026",
+              "expected_impact": "$450K annual revenue increase",
+              "confidence": 87
+            },
+            {
+              "priority": "Evaluate Austin market expansion",
+              "timeline": "Q2 2026",
+              "expected_impact": "16.8% projected ROI",
+              "confidence": 78
+            }
+          ],
+          "board_talking_points": [
+            "Portfolio NOI growth 8.6% demonstrates operational excellence",
+            "AI-driven maintenance preventing $1.25M in emergency repairs",
+            "Top quartile performance vs peer group validates strategy",
+            "Market expansion opportunities identified in Austin and Miami"
+          ]
+        }
+      }
+    },
+
+    "panel_4_operational_efficiency": {
+      "panel_id": "operational_efficiency_resource_optimization",
+      "title": "Operational Efficiency & Resource Optimization",
+      "priority": 4,
+      "refresh_interval_seconds": 86400,
+      "data": {
+        "portfolio_performance": {
+          "total_properties": 8,
+          "total_sqft": 2850000,
+          "total_assets_managed": 342,
+          "properties_at_target_performance": 6,
+          "properties_underperforming": 2,
+          "avg_asset_health_score": 84.2,
+          "operational_efficiency_score": 91
+        },
+        "resource_utilization": {
+          "maintenance_team_efficiency": {
+            "total_technicians": 24,
+            "avg_utilization_pct": 78.5,
+            "productivity_score": 87,
+            "response_time_avg_hours": 2.3,
+            "sla_compliance_pct": 94.5
+          },
+          "vendor_performance": {
+            "total_vendors": 15,
+            "avg_performance_rating": 4.2,
+            "cost_efficiency_score": 82,
+            "vendors_exceeding_expectations": 9,
+            "vendors_requiring_improvement": 2,
+            "contract_renewals_upcoming": 4
+          },
+          "technology_adoption": {
+            "iot_sensors_deployed": 847,
+            "automation_coverage_pct": 68,
+            "ai_utilization_score": 76,
+            "digital_transformation_progress": 83
+          }
+        },
+        "cost_optimization": {
+          "energy_management": {
+            "total_energy_consumption_kwh": 2450000,
+            "energy_efficiency_improvement_ytd_pct": 8.3,
+            "energy_cost_reduction_ytd": 125000.00,
+            "renewable_energy_pct": 35,
+            "carbon_footprint_reduction_pct": 12.1
+          },
+          "maintenance_optimization": {
+            "preventive_maintenance_ratio": 76,
+            "emergency_repairs_reduction_pct": 23,
+            "maintenance_cost_per_sqft": 4.85,
+            "asset_uptime_pct": 98.2,
+            "warranty_claim_recovery": 45000.00
+          },
+          "procurement_efficiency": {
+            "vendor_consolidation_savings": 85000.00,
+            "bulk_purchasing_savings": 32000.00,
+            "contract_optimization_savings": 67000.00,
+            "total_procurement_savings_ytd": 184000.00
+          }
+        },
+        "performance_benchmarking": {
+          "industry_comparisons": {
+            "operating_expense_ratio": {
+              "portfolio": 36.8,
+              "industry_median": 42.1,
+              "percentile_rank": 85
+            },
+            "tenant_satisfaction": {
+              "portfolio": 4.2,
+              "industry_median": 3.7,
+              "percentile_rank": 78
+            },
+            "energy_efficiency": {
+              "portfolio": 87.5,
+              "industry_median": 79.2,
+              "percentile_rank": 82
+            },
+            "maintenance_response_time": {
+              "portfolio_hours": 2.3,
+              "industry_median_hours": 4.1,
+              "percentile_rank": 89
+            }
+          },
+          "improvement_opportunities": [
+            {
+              "area": "Digital Automation",
+              "current_score": 68,
+              "target_score": 85,
+              "investment_required": 450000.00,
+              "annual_savings_potential": 180000.00
+            },
+            {
+              "area": "Predictive Analytics",
+              "current_score": 76,
+              "target_score": 90,
+              "investment_required": 320000.00,
+              "annual_savings_potential": 240000.00
+            }
+          ]
+        },
+        "operational_insights": {
+          "efficiency_trends": [
+            "Maintenance team productivity increased 12% YTD",
+            "Emergency repairs down 23% due to predictive maintenance",
+            "Energy efficiency improvements saving $125K annually",
+            "Vendor performance ratings improved across 80% of contracts"
+          ],
+          "optimization_recommendations": [
+            {
+              "recommendation": "Expand IoT sensor deployment to remaining 15% of assets",
+              "impact": "Improve predictive maintenance coverage",
+              "investment": 125000.00,
+              "timeline": "Q4 2025"
+            },
+            {
+              "recommendation": "Implement automated work order routing",
+              "impact": "Reduce response times by 30%",
+              "investment": 85000.00,
+              "timeline": "Q1 2026"
+            }
+          ]
+        }
+      }
+    },
+
+    "panel_5_sustainability_esg": {
+      "panel_id": "sustainability_esg_performance",
+      "title": "Sustainability & ESG Performance Metrics",
+      "priority": 5,
+      "refresh_interval_seconds": 86400,
+      "data": {
+        "environmental_performance": {
+          "energy_metrics": {
+            "total_energy_consumption_kwh": 2450000,
+            "renewable_energy_pct": 35,
+            "energy_intensity_kwh_per_sqft": 86.0,
+            "energy_reduction_ytd_pct": 8.3,
+            "carbon_emissions_metric_tons": 1245,
+            "carbon_intensity_reduction_pct": 12.1,
+            "energy_star_portfolio_score": 82
+          },
+          "water_management": {
+            "total_water_consumption_gallons": 8450000,
+            "water_efficiency_improvement_pct": 6.2,
+            "water_recycling_pct": 15,
+            "leak_detection_saves_gallons": 125000
+          },
+          "waste_management": {
+            "waste_diversion_rate_pct": 78,
+            "recycling_rate_pct": 65,
+            "composting_rate_pct": 13,
+            "landfill_waste_reduction_pct": 22
+          }
+        },
+        "social_responsibility": {
+          "tenant_wellness": {
+            "air_quality_score": 89,
+            "wellness_amenities_count": 12,
+            "tenant_health_program_participation_pct": 43,
+            "wellness_certification_properties": 3
+          },
+          "community_impact": {
+            "local_vendor_pct": 68,
+            "community_investment_annual": 125000.00,
+            "volunteer_hours_ytd": 450,
+            "educational_partnerships": 4
+          },
+          "diversity_inclusion": {
+            "minority_vendor_pct": 32,
+            "women_owned_vendor_pct": 28,
+            "diversity_training_completion_pct": 95,
+            "supplier_diversity_score": 78
+          }
+        },
+        "governance_compliance": {
+          "board_governance": {
+            "board_diversity_pct": 40,
+            "independent_directors_pct": 75,
+            "esg_expertise_on_board": true,
+            "annual_esg_reporting": true
+          },
+          "compliance_metrics": {
+            "regulatory_compliance_score": 96,
+            "audit_findings_resolved_pct": 100,
+            "certifications_maintained": 8,
+            "training_compliance_pct": 98
+          },
+          "transparency": {
+            "sustainability_report_published": true,
+            "esg_data_third_party_verified": true,
+            "stakeholder_engagement_sessions": 6,
+            "public_commitments_on_track": 4
+          }
+        },
+        "esg_ratings_benchmarks": {
+          "external_ratings": {
+            "gresb_score": 78,
+            "gresb_peer_ranking": "GREEN_STAR",
+            "msci_esg_rating": "A",
+            "sustainalytics_score": 22.1,
+            "esg_risk_rating": "MEDIUM"
+          },
+          "certification_status": {
+            "leed_certified_properties": 5,
+            "energy_star_certified_properties": 6,
+            "boma_best_certified_properties": 3,
+            "well_certified_properties": 2
+          },
+          "investor_alignment": {
+            "esg_focused_investors_pct": 45,
+            "green_financing_utilized": 850000.00,
+            "sustainability_linked_loans": 2,
+            "green_bond_eligible_assets_pct": 60
+          }
+        },
+        "sustainability_roadmap": {
+          "net_zero_target": "2035",
+          "carbon_reduction_target_2030_pct": 50,
+          "renewable_energy_target_2028_pct": 75,
+          "key_initiatives": [
+            {
+              "initiative": "Solar Panel Installation Program",
+              "timeline": "2025-2027",
+              "investment": 2400000.00,
+              "carbon_reduction_tons": 890,
+              "roi_years": 8.5
+            },
+            {
+              "initiative": "Building Automation Upgrade",
+              "timeline": "2025-2026",
+              "investment": 1200000.00,
+              "energy_savings_pct": 15,
+              "roi_years": 6.2
+            },
+            {
+              "initiative": "Electric Vehicle Infrastructure",
+              "timeline": "2026",
+              "investment": 450000.00,
+              "tenant_satisfaction_impact": "HIGH"
+            }
+          ],
+          "progress_tracking": {
+            "initiatives_on_track": 8,
+            "initiatives_ahead_of_schedule": 2,
+            "initiatives_requiring_attention": 1,
+            "overall_progress_pct": 78
+          }
+        }
+      }
+    }
+  }
+}
