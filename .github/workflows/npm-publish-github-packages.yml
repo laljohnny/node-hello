@@ -65,13 +65,14 @@ jobs:
 
       - name: Copy build files to EC2 server
         run: |
-          scp -i ~/.ssh/deploy-key.pem -r ./artifact/* \
-          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/myapp/
+          scp -i ~/.ssh/deploy-key.pem -r ././artifact-files/* \
+          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/html/
 
       - name: Restart app on EC2
         run: |
           ssh -i ~/.ssh/deploy-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-          "cd /var/www/myapp && pm2 restart all"     
+          "systemctl restart apache2"
+          "systemctl status apache2"
 
 
 
