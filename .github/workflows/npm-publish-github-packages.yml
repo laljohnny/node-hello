@@ -1,22 +1,12 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
-
+name: CD-TP-admin2-Backend
 on:
   push:
     branches:
       - release
-      - master
-    tags:
-      - "v*"
 
   pull_request:
     branches:
       - release
-      - master
-    tags:
-      - "v*"
 
   release:
     types: [created, published]
@@ -24,28 +14,71 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm run build
+    environment: envdev
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    strategy:
+      matrix:
+        node-version: [ 22 ] 
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          node-version: ${{ matrix.node-version }}
+
       - run: npm install
-      - run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - run: CI=false npm run build --if-present
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: tp-admin2-backend-app-artifact-${{ github.run_number }}
+          path: dist/
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: envdev
+    needs: build
+
+    steps:
+      - name: Download build artifact 
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: tp-admin2-backend-app-artifact-${{ github.run_number }}
+          path: ./artifact-files
+
+      - name: Show downloaded files
+        run: ls -R ./artifact-files
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy-key.pem
+          chmod 600 ~/.ssh/deploy-key.pem
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copy build files to EC2 server
+        run: |
+          # Create .env file from GitHub secret envirnoment envdev
+          echo "${{ secrets.ENV_FILE }}" > .env
+      
+          # Copy artifacts + .env to EC2
+          scp -i ~/.ssh/deploy-key.pem -r ./artifact-files/* .env \
+          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/admin2-backend
+
+
+      - name: Restart app on EC2
+        run: |
+          ssh -i ~/.ssh/deploy-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            # Load NVM so PM2 becomes available
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      
+            pm2 restart trustlypay_admin2_backend_1.0 || echo "PM2 not found!"
+            pm2 list || echo "PM2 list failed!"
+      
+            sudo systemctl restart apache2
+            sudo systemctl status apache2 --no-pager
+          EOF
