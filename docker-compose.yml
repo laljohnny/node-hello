@@ -1,0 +1,50 @@
+
+version: "3.9"
+
+services:
+  service-ai-addon-service:
+    build:
+      context: ./services/ai-addon-service
+      dockerfile: Dockerfile
+    container_name: ai-addon-service
+    ports:
+      - "3004:3000"
+    restart: unless-stopped
+
+  service-auth-service:
+    build:
+      context: ./services/auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  service-file-service:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    container_name: file-service
+    ports:
+      - "3002:3000"
+    restart: unless-stopped
+
+  service-graphql-service:
+    build:
+      context: ./services/graphql-service
+      dockerfile: Dockerfile
+    container_name: graphql-service
+    ports:
+      - "4000:3000"
+    restart: unless-stopped
+
+  service-stripe-service:
+    build:
+      context: ./services/stripe-service
+      dockerfile: Dockerfile
+    container_name: stripe-service
+    ports:
+      - "3003:3000"
+    restart: unless-stopped
+
+
