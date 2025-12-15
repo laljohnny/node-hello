@@ -1,0 +1,43 @@
+# ==================== Maintenance Activity Types ====================
+
+type MaintenanceActivity {
+  id: ID!
+  assetId: ID!
+  maintenanceScheduleId: ID
+  status: String!
+  completedBy: ID
+  completedOn: String
+  duration: Int
+  scheduledAt: String!
+  workOrderId: ID
+  createdAt: String!
+  updatedAt: String!
+}
+
+# ==================== Input Types ====================
+
+input CompleteMaintenanceActivityInput {
+  activityId: ID!
+  completedBy: ID!
+  duration: Int
+}
+
+input MaintenanceActivityFilterInput {
+  assetId: ID
+  maintenanceScheduleId: ID
+}
+
+# ==================== Queries ====================
+
+extend type Query {
+  # Get asset maintenance activities with optional filtering by assetId and/or maintenanceScheduleId
+  getAssetMaintenanceActivities(filter: MaintenanceActivityFilterInput, limit: Int, offset: Int): [MaintenanceActivity!]!
+}
+
+# ==================== Mutations ====================
+
+extend type Mutation {
+  # Complete a maintenance activity and create next occurrence
+  completeMaintenanceActivity(input: CompleteMaintenanceActivityInput!): MaintenanceActivity!
+}
+

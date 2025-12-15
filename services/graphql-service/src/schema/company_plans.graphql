@@ -1,0 +1,102 @@
+type CompanyPlanCompany {
+  id: ID!
+  name: String!
+  email: String!
+  sub_domain: String
+  role: String
+  active: Boolean
+}
+
+type CompanySubscriptionDetails {
+  company_id: ID!
+  company_name: String!
+  plan_name: String
+  subscription_status: String
+  asset_limit: Int
+  asset_count: Int
+  asset_usage_pct: Float
+  user_limit: Int
+  user_count: Int
+  user_usage_pct: Float
+  storage_limit_gb: Float
+  storage_used_bytes: String
+  storage_usage_pct: Float
+  location_limit: Int
+  location_count: Int
+  location_usage_pct: Float
+  ai_credits_balance: Int
+}
+
+type CompanyPlanPlan {
+  id: ID!
+  name: String!
+  description: String
+  amount: Float!
+  currency: String!
+  interval: String!
+  interval_count: Int!
+  features: JSON
+  limits: JSON
+  active: Boolean!
+}
+
+type CompanyPlan {
+  id: ID!
+  company_id: ID!
+  plan_id: ID!
+  stripe_customer_id: String
+  stripe_subscription_id: String
+  stripe_transaction_id: String
+  stripe_transaction_status: String
+  status: String!
+  start_date: String!
+  next_due_date: String
+  ends_on: String
+  created_at: String!
+  updated_at: String!
+  company: CompanyPlanCompany
+  plan: CompanyPlanPlan
+}
+
+input CreateCompanyPlanInput {
+  company_id: ID!
+  plan_id: ID!
+  stripe_customer_id: String
+  stripe_subscription_id: String
+  stripe_transaction_id: String
+  stripe_transaction_status: String
+  status: String
+  start_date: String
+  next_due_date: String
+  ends_on: String
+}
+
+input UpdateCompanyPlanInput {
+  id: ID!
+  company_id: ID
+  plan_id: ID
+  stripe_customer_id: String
+  stripe_subscription_id: String
+  stripe_transaction_id: String
+  stripe_transaction_status: String
+  status: String
+  start_date: String
+  next_due_date: String
+  ends_on: String
+}
+
+input DeleteCompanyPlanInput {
+  id: ID!
+}
+
+type Query {
+  companyPlans(company_id: ID): [CompanyPlan!]!
+  companyPlan(id: ID!): CompanyPlan
+  companySubscriptionDetails(company_id: ID!): CompanySubscriptionDetails
+}
+
+type Mutation {
+  createCompanyPlan(input: CreateCompanyPlanInput!): CompanyPlan!
+  updateCompanyPlan(input: UpdateCompanyPlanInput!): CompanyPlan!
+  deleteCompanyPlan(input: DeleteCompanyPlanInput!): Boolean!
+}

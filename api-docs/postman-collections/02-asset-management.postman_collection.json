@@ -1,0 +1,564 @@
+{
+  "info": {
+    "_postman_id": "category-02",
+    "name": "GraphQL API - 02. Asset Management",
+    "description": "# 02. Asset Management\n\nAsset CRUD operations, SOPs, and incident plans management\n\n## \ud83d\udd10 Authentication\n1. Import `GraphQL-Environment.postman_environment.json`\n2. Set `{{graphql_url}}` in environment\n3. Run login/signup from Authentication collection\n4. Tokens are automatically saved and used\n\n## \ud83d\udcca APIs in this collection\n- **Queries**: 6\n- **Mutations**: 11\n\n## \ud83d\udd17 Related Collections\nThis is a focused collection for 02. Asset Management. For complete API reference, see the master collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Queries",
+      "item": [
+        {
+          "name": "asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Asset {\n  asset\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "asset - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "assets",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Assets {\n  assets\n}",
+                "variables": "{\n  \"filter\": {},\n  \"limit\": 10,\n  \"offset\": 0\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "assets - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "assetSOPs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Assetsops {\n  assetSOPs\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "assetSOPs - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "assetIncidentPlans",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Assetincidentplans {\n  assetIncidentPlans\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "assetIncidentPlans - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "assetSOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Assetsop {\n  assetSOP\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "assetSOP - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "assetIncidentPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Assetincidentplan {\n  assetIncidentPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "assetIncidentPlan - 02. Asset Management"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Mutations",
+      "item": [
+        {
+          "name": "createAsset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Createasset {\n  createAsset\n}",
+                "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "createAsset - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateAsset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updateasset {\n  updateAsset\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateAsset - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteAsset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deleteasset {\n  deleteAsset\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteAsset - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "createAssetSOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Createassetsop {\n  createAssetSOP\n}",
+                "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "createAssetSOP - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "generateAssetSOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Generateassetsop {\n  generateAssetSOP\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "generateAssetSOP - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateAssetSOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updateassetsop {\n  updateAssetSOP\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateAssetSOP - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteAssetSOP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deleteassetsop {\n  deleteAssetSOP\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteAssetSOP - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "createAssetIncidentPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Createassetincidentplan {\n  createAssetIncidentPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\",\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "createAssetIncidentPlan - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "generateAssetIncidentPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Generateassetincidentplan {\n  generateAssetIncidentPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "generateAssetIncidentPlan - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateAssetIncidentPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updateassetincidentplan {\n  updateAssetIncidentPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\",\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateAssetIncidentPlan - 02. Asset Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteAssetIncidentPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deleteassetincidentplan {\n  deleteAssetIncidentPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteAssetIncidentPlan - 02. Asset Management"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+type AuthResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  role: String!
+  companyId: ID
+  companyName: String
+  schema: String
+  twoFactorEnabled: Boolean
+  invitationStatus: String
+  invitedBy: ID
+  invitedOn: String
+  active: Boolean
+  deletedAt: String
+  phoneNumber: String
+}
+
+type TwoFactorSetup {
+  secret: String!
+  qrCode: String!
+}
+
+type Invitation {
+  id: ID!
+  email: String!
+  role: String!
+  status: String!
+  expiresAt: String!
+}
+
+type CompanyOwner {
+  id: ID
+  email: String
+  firstName: String
+  lastName: String
+  role: String
+  phoneNumber: String
+  active: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+type Company {
+  id: ID!
+  name: String!
+  email: String
+  subdomain: String
+  role: String!
+  parentCompanyId: ID
+  parentCompany: Company
+  schemaName: String
+  schemaStatus: String
+  address: String
+  city: String
+  state: String
+  country: String
+  zip: String
+  phoneNumber: String
+  countryCode: String
+  industry: String
+  website: String
+  businessType: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  owner: CompanyOwner
+}
+
+input SignupInput {
+  companyName: String!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  subdomain: String!
+  phoneNumber: String
+  countryCode: String
+  industry: String
+  jobTitle: String
+}
+
+input PartnerSignupInput {
+  companyName: String!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String
+  countryCode: String
+  address: String
+  city: String
+  state: String
+  country: String
+  zip: String
+  industry: String
+  jobTitle: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+  subdomain: String
+  twoFactorCode: String
+}
+
+input SendInvitationInput {
+  email: String!
+  role: String
+  companyId: String
+  belongsTo: String
+}
+
+input ResendInvitationInput {
+  email: String!
+  role: String!
+}
+
+input AcceptInvitationInput {
+  token: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input ResetPasswordRequestInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  token: String!
+  newPassword: String!
+}
+
+input Enable2FAInput {
+  userId: ID!
+}
+
+input Verify2FAInput {
+  userId: ID!
+  code: String!
+}
+
+input UpdateCompanyInput {
+  id: ID!
+  name: String
+  email: String
+  address: String
+  city: String
+  state: String
+  country: String
+  zip: String
+  phoneNumber: String
+  countryCode: String
+  industry: String
+  website: String
+  businessType: String
+}
+
+input SwitchCompanyInput {
+  companyId: ID!
+}
+
+input UpdateCompanyUserInput {
+  userId: ID!
+  firstName: String
+  lastName: String
+  role: String
+  active: Boolean
+}
+
+type Query {
+  me: User
+  companyUsers: [User!]!
+  company(id: ID!): Company
+  companies(parentCompanyId: ID): [Company!]!
+}
+
+type Mutation {
+  # Authentication
+  signup(input: SignupInput!): AuthResponse!
+  partnerSignup(input: PartnerSignupInput!): AuthResponse!
+  login(input: LoginInput!): AuthResponse!
+  refreshToken(refreshToken: String!): AuthResponse!
+  logout: Boolean!
+  
+  # Invitations
+  sendInvitation(input: SendInvitationInput!): Invitation!
+  resendInvitation(input: ResendInvitationInput!): Invitation!
+  acceptInvitation(input: AcceptInvitationInput!): AuthResponse!
+  
+  # Password Reset
+  requestPasswordReset(input: ResetPasswordRequestInput!): Boolean!
+  resetPassword(input: ResetPasswordInput!): Boolean!
+  
+  # Two-Factor Authentication
+  enable2FA(input: Enable2FAInput!): TwoFactorSetup!
+  verify2FA(input: Verify2FAInput!): Boolean!
+  
+  # Company Context
+  switchCompanyContext(input: SwitchCompanyInput!): AuthResponse!
+  
+  # Company Management
+  updateCompany(input: UpdateCompanyInput!): Company!
+  deleteCompany(id: ID!): Boolean!
+  
+  # Company User Management
+  updateCompanyUser(input: UpdateCompanyUserInput!): User!
+  deleteCompanyUser(userId: ID!): Boolean!
+}
+

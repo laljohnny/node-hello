@@ -1,0 +1,784 @@
+{
+  "info": {
+    "_postman_id": "category-01",
+    "name": "GraphQL API - 01. Authentication & User Management",
+    "description": "# 01. Authentication & User Management\n\nUser authentication, company management, and user management APIs\n\n## \ud83d\udd10 Authentication\n1. Import `GraphQL-Environment.postman_environment.json`\n2. Set `{{graphql_url}}` in environment\n3. Run login/signup from Authentication collection\n4. Tokens are automatically saved and used\n\n## \ud83d\udcca APIs in this collection\n- **Queries**: 4\n- **Mutations**: 17\n\n## \ud83d\udd17 Related Collections\nThis is a focused collection for 01. Authentication & User Management. For complete API reference, see the master collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Queries",
+      "item": [
+        {
+          "name": "me",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Me {\n  me\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "me - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "companyUsers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Companyusers {\n  companyUsers\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "companyUsers - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Company {\n  company\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "company - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "companies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Companies {\n  companies\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "companies - 01. Authentication & User Management"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Mutations",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Signup {\n  signup\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "signup - 01. Authentication & User Management"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data) {",
+                  "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                  "    if (authData && authData.accessToken) {",
+                  "        pm.environment.set('access_token', authData.accessToken);",
+                  "        pm.environment.set('refresh_token', authData.refreshToken);",
+                  "        if (authData.user) {",
+                  "            pm.environment.set('user_id', authData.user.id);",
+                  "            pm.environment.set('company_id', authData.user.companyId);",
+                  "        }",
+                  "        console.log('\u2705 Tokens saved');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "partnerSignup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Partnersignup {\n  partnerSignup\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "partnerSignup - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Login {\n  login\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "login - 01. Authentication & User Management"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data) {",
+                  "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                  "    if (authData && authData.accessToken) {",
+                  "        pm.environment.set('access_token', authData.accessToken);",
+                  "        pm.environment.set('refresh_token', authData.refreshToken);",
+                  "        if (authData.user) {",
+                  "            pm.environment.set('user_id', authData.user.id);",
+                  "            pm.environment.set('company_id', authData.user.companyId);",
+                  "        }",
+                  "        console.log('\u2705 Tokens saved');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "refreshToken",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Refreshtoken {\n  refreshToken\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "refreshToken - 01. Authentication & User Management"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data) {",
+                  "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                  "    if (authData && authData.accessToken) {",
+                  "        pm.environment.set('access_token', authData.accessToken);",
+                  "        pm.environment.set('refresh_token', authData.refreshToken);",
+                  "        if (authData.user) {",
+                  "            pm.environment.set('user_id', authData.user.id);",
+                  "            pm.environment.set('company_id', authData.user.companyId);",
+                  "        }",
+                  "        console.log('\u2705 Tokens saved');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Logout {\n  logout\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "logout - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "sendInvitation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Sendinvitation {\n  sendInvitation\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "sendInvitation - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "resendInvitation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Resendinvitation {\n  resendInvitation\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "resendInvitation - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "acceptInvitation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Acceptinvitation {\n  acceptInvitation\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "acceptInvitation - 01. Authentication & User Management"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data) {",
+                  "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                  "    if (authData && authData.accessToken) {",
+                  "        pm.environment.set('access_token', authData.accessToken);",
+                  "        pm.environment.set('refresh_token', authData.refreshToken);",
+                  "        if (authData.user) {",
+                  "            pm.environment.set('user_id', authData.user.id);",
+                  "            pm.environment.set('company_id', authData.user.companyId);",
+                  "        }",
+                  "        console.log('\u2705 Tokens saved');",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "requestPasswordReset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Requestpasswordreset {\n  requestPasswordReset\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "requestPasswordReset - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "resetPassword",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Resetpassword {\n  resetPassword\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "resetPassword - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "enable2FA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Enable2fa {\n  enable2FA\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "enable2FA - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "verify2FA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Verify2fa {\n  verify2FA\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "verify2FA - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "switchCompanyContext",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Switchcompanycontext {\n  switchCompanyContext\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "switchCompanyContext - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateCompany",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updatecompany {\n  updateCompany\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateCompany - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCompany",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deletecompany {\n  deleteCompany\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteCompany - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateCompanyUser",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updatecompanyuser {\n  updateCompanyUser\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateCompanyUser - 01. Authentication & User Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCompanyUser",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deletecompanyuser {\n  deleteCompanyUser\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteCompanyUser - 01. Authentication & User Management"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "category-10",
+    "name": "GraphQL API - 10. Company Plan Management",
+    "description": "# 10. Company Plan Management\n\nCompany subscription and billing management\n\n## \ud83d\udd10 Authentication\n1. Import `GraphQL-Environment.postman_environment.json`\n2. Set `{{graphql_url}}` in environment\n3. Run login/signup from Authentication collection\n4. Tokens are automatically saved and used\n\n## \ud83d\udcca APIs in this collection\n- **Queries**: 2\n- **Mutations**: 3\n\n## \ud83d\udd17 Related Collections\nThis is a focused collection for 10. Company Plan Management. For complete API reference, see the master collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Queries",
+      "item": [
+        {
+          "name": "companyPlans",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Companyplans {\n  companyPlans\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "companyPlans - 10. Company Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "companyPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Companyplan {\n  companyPlan\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "companyPlan - 10. Company Plan Management"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Mutations",
+      "item": [
+        {
+          "name": "createCompanyPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Createcompanyplan {\n  createCompanyPlan\n}",
+                "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "createCompanyPlan - 10. Company Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updateCompanyPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updatecompanyplan {\n  updateCompanyPlan\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updateCompanyPlan - 10. Company Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCompanyPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deletecompanyplan {\n  deleteCompanyPlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deleteCompanyPlan - 10. Company Plan Management"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

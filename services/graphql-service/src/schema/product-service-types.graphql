@@ -1,0 +1,39 @@
+type ProductServiceType {
+  id: ID!
+  name: String!
+  productCategoryIds: [ID!]!
+  categories: [ProductCategory!]!
+  description: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateProductServiceTypeInput {
+  name: String!
+  productCategoryIds: [ID!]
+  description: String
+}
+
+input UpdateProductServiceTypeInput {
+  id: ID!
+  name: String
+  productCategoryIds: [ID!]
+  description: String
+}
+
+input DeleteProductServiceTypeInput {
+  id: ID!
+}
+
+extend type Query {
+  productServiceTypes: [ProductServiceType!]!
+  productServiceType(id: ID!): ProductServiceType
+}
+
+extend type Mutation {
+  createProductServiceType(input: CreateProductServiceTypeInput!): ProductServiceType!
+  updateProductServiceType(input: UpdateProductServiceTypeInput!): ProductServiceType!
+  deleteProductServiceType(input: DeleteProductServiceTypeInput!): Boolean!
+}
+

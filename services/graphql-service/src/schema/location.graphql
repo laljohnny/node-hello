@@ -1,0 +1,75 @@
+scalar JSON
+
+type Location {
+  id: ID!
+  locationName: String!
+  description: String
+  locationType: ID
+  locationTypeName: String
+  address: String
+  city: String
+  state: String
+  zipcode: String
+  country: String
+  coordinates: String
+  parentId: ID
+  parent: Location
+  rootLocation: Location
+  parentLocationTree: [Location!]!
+  sublocation: [Location!]!
+  fileIds: [ID!]!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateLocationInput {
+  locationName: String!
+  description: String
+  locationType: ID
+  address: String
+  city: String
+  state: String
+  zipcode: String
+  country: String
+  coordinates: String
+  parentId: ID
+  fileIds: [ID!]
+  fileUploads: [FileUploadInput!]
+}
+
+
+input UpdateLocationInput {
+  id: ID!
+  locationName: String
+  description: String
+  locationType: ID
+  address: String
+  city: String
+  state: String
+  zipcode: String
+  country: String
+  coordinates: String
+  parentId: ID
+  fileIds: [ID!]
+  fileUploads: [FileUploadInput!]
+}
+
+
+input DeleteLocationInput {
+  id: ID!
+}
+
+extend type Query {
+  locations: [Location!]!
+  locationsTree: JSON!
+  location(id: ID!): Location
+  getAssetsByLocationId(locationId: ID!, includeSubLocations: Boolean = true): AssetsResponse!
+}
+
+extend type Mutation {
+  createLocation(input: CreateLocationInput!): Location!
+  updateLocation(input: UpdateLocationInput!): Location!
+  deleteLocation(input: DeleteLocationInput!): Boolean!
+}
+

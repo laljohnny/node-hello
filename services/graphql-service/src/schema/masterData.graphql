@@ -1,0 +1,521 @@
+scalar JSON
+
+# --- Master Asset Categories ---
+type MasterAssetCategory {
+  id: ID!
+  name: String!
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetCategoryInput {
+  name: String!
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+}
+
+input UpdateMasterAssetCategoryInput {
+  id: ID!
+  name: String
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+}
+
+# --- Master Asset Part Fields ---
+type MasterAssetPartField {
+  id: ID!
+  parent_id: ID
+  asset_part_id: ID!
+  field_name: String!
+  description: String
+  field_type: String!
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  show_in_panel: Boolean
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetPartFieldInput {
+  parent_id: ID
+  asset_part_id: ID!
+  field_name: String!
+  description: String
+  field_type: String!
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  show_in_panel: Boolean
+}
+
+input UpdateMasterAssetPartFieldInput {
+  id: ID!
+  parent_id: ID
+  asset_part_id: ID
+  field_name: String
+  description: String
+  field_type: String
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  show_in_panel: Boolean
+}
+
+# --- Master Asset Parts ---
+type MasterAssetPart {
+  id: ID!
+  name: String!
+  description: String
+  asset_type_id: ID
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetPartInput {
+  name: String!
+  description: String
+  asset_type_id: ID
+}
+
+input UpdateMasterAssetPartInput {
+  id: ID!
+  name: String
+  description: String
+  asset_type_id: ID
+}
+
+# --- Master Asset Service Types ---
+type MasterAssetServiceType {
+  id: ID!
+  name: String!
+  asset_category_ids: [ID]
+  description: String
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetServiceTypeInput {
+  name: String!
+  asset_category_ids: [ID]
+  description: String
+}
+
+input UpdateMasterAssetServiceTypeInput {
+  id: ID!
+  name: String
+  asset_category_ids: [ID]
+  description: String
+}
+
+# --- Master Asset Type Fields ---
+type MasterAssetTypeField {
+  id: ID!
+  asset_type_id: ID!
+  field_type: String!
+  field_name: String!
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  parent_field_id: ID
+  show_in_panel: Boolean
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetTypeFieldInput {
+  asset_type_id: ID!
+  field_type: String!
+  field_name: String!
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  parent_field_id: ID
+  show_in_panel: Boolean
+}
+
+input UpdateMasterAssetTypeFieldInput {
+  id: ID!
+  asset_type_id: ID
+  field_type: String
+  field_name: String
+  allowed_values: JSON
+  unit: String
+  is_required: Boolean
+  display_order: Int
+  parent_field_id: ID
+  show_in_panel: Boolean
+}
+
+# --- Master Asset Types ---
+type MasterAssetType {
+  id: ID!
+  asset_category_id: ID!
+  name: String!
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterAssetTypeInput {
+  asset_category_id: ID!
+  name: String!
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+}
+
+input UpdateMasterAssetTypeInput {
+  id: ID!
+  asset_category_id: ID
+  name: String
+  description: String
+  icon_name: String
+  icon_color: String
+  icon_type: String
+  is_default: Boolean
+}
+
+# --- Master Manufacturers ---
+type MasterManufacturer {
+  id: ID!
+  name: String!
+  country_code: String!
+  country: String
+  website: String
+  contact_email: String
+  phone_number: String
+  description: String
+  is_active: Boolean!
+  contact_person: String
+  address: String
+  created_at: String!
+  updated_at: String!
+  deleted_at: String
+}
+
+input CreateMasterManufacturerInput {
+  name: String!
+  country_code: String!
+  country: String
+  website: String
+  contact_email: String
+  phone_number: String
+  description: String
+  is_active: Boolean = true
+  contact_person: String
+  address: String
+}
+
+input UpdateMasterManufacturerInput {
+  id: ID!
+  name: String
+  country_code: String
+  country: String
+  website: String
+  contact_email: String
+  phone_number: String
+  description: String
+  is_active: Boolean
+  contact_person: String
+  address: String
+}
+
+# --- Master Vendors (Tenant Schema) ---
+type MasterVendor {
+  id: ID!
+  company_name: String!
+  website: String
+  email: String
+  name: String
+  phone_number: String
+  country_code: String
+  vendor_type: String!
+  can_login: Boolean
+  password: String
+  invited_by_user: ID
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterVendorInput {
+  company_name: String!
+  website: String
+  email: String
+  name: String
+  phone_number: String
+  country_code: String
+  vendor_type: String
+  can_login: Boolean
+  password: String
+}
+
+input UpdateMasterVendorInput {
+  id: ID!
+  company_name: String
+  website: String
+  email: String
+  name: String
+  phone_number: String
+  country_code: String
+  vendor_type: String
+  can_login: Boolean
+  password: String
+}
+
+# --- Master Work Order Assignment Types ---
+type MasterWorkOrderAssignmentType {
+  id: ID!
+  name: String!
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterWorkOrderAssignmentTypeInput {
+  name: String!
+}
+
+input UpdateMasterWorkOrderAssignmentTypeInput {
+  id: ID!
+  name: String
+}
+
+# --- Master Work Order Service Categories ---
+type MasterWorkOrderServiceCategory {
+  id: ID!
+  name: String!
+  description: String
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterWorkOrderServiceCategoryInput {
+  name: String!
+}
+
+input UpdateMasterWorkOrderServiceCategoryInput {
+  id: ID!
+  name: String
+}
+
+# --- Master Work Order Stages ---
+type MasterWorkOrderStage {
+  id: ID!
+  name: String!
+  color_code: String
+  is_default: Boolean
+  display_order: Int
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterWorkOrderStageInput {
+  name: String!
+  color_code: String
+  is_default: Boolean
+  display_order: Int
+}
+
+input UpdateMasterWorkOrderStageInput {
+  id: ID!
+  name: String
+  color_code: String
+  is_default: Boolean
+  display_order: Int
+}
+
+# --- Master Work Order Types ---
+type MasterWorkOrderType {
+  id: ID!
+  name: String!
+  description: String
+  created_at: String
+  updated_at: String
+}
+
+input CreateMasterWorkOrderTypeInput {
+  name: String!
+}
+
+input UpdateMasterWorkOrderTypeInput {
+  id: ID!
+  name: String
+}
+
+# --- Common Inputs/Types ---
+input DeleteMasterDataInput {
+  id: ID!
+}
+
+type DeleteMasterDataResponse {
+  success: Boolean!
+  message: String!
+}
+
+extend type Query {
+  masterAssetCategories: [MasterAssetCategory!]!
+  masterAssetCategory(id: ID!): MasterAssetCategory
+
+  masterAssetPartFields(asset_part_id: ID): [MasterAssetPartField!]!
+  masterAssetPartField(id: ID!): MasterAssetPartField
+
+  masterAssetParts(asset_type_id: ID): [MasterAssetPart!]!
+  masterAssetPart(id: ID!): MasterAssetPart
+
+  masterAssetServiceTypes: [MasterAssetServiceType!]!
+  masterAssetServiceType(id: ID!): MasterAssetServiceType
+
+  masterAssetTypeFields(asset_type_id: ID): [MasterAssetTypeField!]!
+  masterAssetTypeField(id: ID!): MasterAssetTypeField
+
+  masterAssetTypes(asset_category_id: ID): [MasterAssetType!]!
+  masterAssetType(id: ID!): MasterAssetType
+
+  masterManufacturers: [MasterManufacturer!]!
+  masterManufacturer(id: ID!): MasterManufacturer
+
+  masterVendors: [MasterVendor!]!
+  masterVendor(id: ID!): MasterVendor
+
+  masterWorkOrderAssignmentTypes: [MasterWorkOrderAssignmentType!]!
+  masterWorkOrderAssignmentType(id: ID!): MasterWorkOrderAssignmentType
+
+  masterWorkOrderServiceCategories: [MasterWorkOrderServiceCategory!]!
+  masterWorkOrderServiceCategory(id: ID!): MasterWorkOrderServiceCategory
+
+  masterWorkOrderStages: [MasterWorkOrderStage!]!
+  masterWorkOrderStage(id: ID!): MasterWorkOrderStage
+
+  masterWorkOrderTypes: [MasterWorkOrderType!]!
+  masterWorkOrderType(id: ID!): MasterWorkOrderType
+}
+
+extend type Mutation {
+  createMasterAssetCategory(
+    input: CreateMasterAssetCategoryInput!
+  ): MasterAssetCategory!
+  updateMasterAssetCategory(
+    input: UpdateMasterAssetCategoryInput!
+  ): MasterAssetCategory!
+  deleteMasterAssetCategory(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterAssetPartField(
+    input: CreateMasterAssetPartFieldInput!
+  ): MasterAssetPartField!
+  updateMasterAssetPartField(
+    input: UpdateMasterAssetPartFieldInput!
+  ): MasterAssetPartField!
+  deleteMasterAssetPartField(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterAssetPart(input: CreateMasterAssetPartInput!): MasterAssetPart!
+  updateMasterAssetPart(input: UpdateMasterAssetPartInput!): MasterAssetPart!
+  deleteMasterAssetPart(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterAssetServiceType(
+    input: CreateMasterAssetServiceTypeInput!
+  ): MasterAssetServiceType!
+  updateMasterAssetServiceType(
+    input: UpdateMasterAssetServiceTypeInput!
+  ): MasterAssetServiceType!
+  deleteMasterAssetServiceType(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterAssetTypeField(
+    input: CreateMasterAssetTypeFieldInput!
+  ): MasterAssetTypeField!
+  updateMasterAssetTypeField(
+    input: UpdateMasterAssetTypeFieldInput!
+  ): MasterAssetTypeField!
+  deleteMasterAssetTypeField(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterAssetType(input: CreateMasterAssetTypeInput!): MasterAssetType!
+  updateMasterAssetType(input: UpdateMasterAssetTypeInput!): MasterAssetType!
+  deleteMasterAssetType(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterManufacturer(
+    input: CreateMasterManufacturerInput!
+  ): MasterManufacturer!
+  updateMasterManufacturer(
+    input: UpdateMasterManufacturerInput!
+  ): MasterManufacturer!
+  deleteMasterManufacturer(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterVendor(input: CreateMasterVendorInput!): MasterVendor!
+  updateMasterVendor(input: UpdateMasterVendorInput!): MasterVendor!
+  deleteMasterVendor(input: DeleteMasterDataInput!): DeleteMasterDataResponse!
+
+  createMasterWorkOrderAssignmentType(
+    input: CreateMasterWorkOrderAssignmentTypeInput!
+  ): MasterWorkOrderAssignmentType!
+  updateMasterWorkOrderAssignmentType(
+    input: UpdateMasterWorkOrderAssignmentTypeInput!
+  ): MasterWorkOrderAssignmentType!
+  deleteMasterWorkOrderAssignmentType(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterWorkOrderServiceCategory(
+    input: CreateMasterWorkOrderServiceCategoryInput!
+  ): MasterWorkOrderServiceCategory!
+  updateMasterWorkOrderServiceCategory(
+    input: UpdateMasterWorkOrderServiceCategoryInput!
+  ): MasterWorkOrderServiceCategory!
+  deleteMasterWorkOrderServiceCategory(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterWorkOrderStage(
+    input: CreateMasterWorkOrderStageInput!
+  ): MasterWorkOrderStage!
+  updateMasterWorkOrderStage(
+    input: UpdateMasterWorkOrderStageInput!
+  ): MasterWorkOrderStage!
+  deleteMasterWorkOrderStage(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+
+  createMasterWorkOrderType(
+    input: CreateMasterWorkOrderTypeInput!
+  ): MasterWorkOrderType!
+  updateMasterWorkOrderType(
+    input: UpdateMasterWorkOrderTypeInput!
+  ): MasterWorkOrderType!
+  deleteMasterWorkOrderType(
+    input: DeleteMasterDataInput!
+  ): DeleteMasterDataResponse!
+}

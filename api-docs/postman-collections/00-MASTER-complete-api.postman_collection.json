@@ -1,0 +1,5734 @@
+{
+  "info": {
+    "_postman_id": "master-graphql-api-collection",
+    "name": "GraphQL API - Complete Collection (Master)",
+    "description": "# Critical Asset Management - Complete GraphQL API Collection\n\n## \ud83d\udcca Quick Stats\n- **Total APIs**: 156\n- **Queries**: 56\n- **Mutations**: 100\n- **Categories**: 14\n\n## \ud83d\udd10 Authentication\n1. Import `GraphQL-Environment.postman_environment.json`\n2. Set `{{graphql_url}}` (default: http://localhost:4000/graphql)\n3. Run `signup` or `login` mutation\n4. Tokens are automatically saved\n\n## \ud83d\udcc1 Collection Structure\nOrganized into 14 functional categories with Queries and Mutations subfolders.\n\n## \ud83d\udca1 Tips\n- Use Postman search (Cmd/Ctrl + K) to find APIs quickly\n- Each request includes example structure\n- For focused work, use category-specific collections",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Authentication & User Management",
+      "description": "User authentication, company management, and user management APIs",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "me",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Me {\n  me\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "me - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "companyUsers",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyusers {\n  companyUsers\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyUsers - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "company",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Company {\n  company\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "company - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "companies",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companies {\n  companies\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companies - 01. Authentication & User Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "signup",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Signup {\n  signup\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "signup - 01. Authentication & User Management"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "if (response.data) {",
+                      "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                      "    if (authData && authData.accessToken) {",
+                      "        pm.environment.set('access_token', authData.accessToken);",
+                      "        pm.environment.set('refresh_token', authData.refreshToken);",
+                      "        if (authData.user) {",
+                      "            pm.environment.set('user_id', authData.user.id);",
+                      "            pm.environment.set('company_id', authData.user.companyId);",
+                      "        }",
+                      "        console.log('\u2705 Tokens saved');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "partnerSignup",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Partnersignup {\n  partnerSignup\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "partnerSignup - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Login {\n  login\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "login - 01. Authentication & User Management"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "if (response.data) {",
+                      "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                      "    if (authData && authData.accessToken) {",
+                      "        pm.environment.set('access_token', authData.accessToken);",
+                      "        pm.environment.set('refresh_token', authData.refreshToken);",
+                      "        if (authData.user) {",
+                      "            pm.environment.set('user_id', authData.user.id);",
+                      "            pm.environment.set('company_id', authData.user.companyId);",
+                      "        }",
+                      "        console.log('\u2705 Tokens saved');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "refreshToken",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Refreshtoken {\n  refreshToken\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "refreshToken - 01. Authentication & User Management"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "if (response.data) {",
+                      "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                      "    if (authData && authData.accessToken) {",
+                      "        pm.environment.set('access_token', authData.accessToken);",
+                      "        pm.environment.set('refresh_token', authData.refreshToken);",
+                      "        if (authData.user) {",
+                      "            pm.environment.set('user_id', authData.user.id);",
+                      "            pm.environment.set('company_id', authData.user.companyId);",
+                      "        }",
+                      "        console.log('\u2705 Tokens saved');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Logout {\n  logout\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "logout - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "sendInvitation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Sendinvitation {\n  sendInvitation\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "sendInvitation - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "resendInvitation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Resendinvitation {\n  resendInvitation\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "resendInvitation - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "acceptInvitation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Acceptinvitation {\n  acceptInvitation\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "acceptInvitation - 01. Authentication & User Management"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "if (response.data) {",
+                      "    const authData = response.data.login || response.data.signup || response.data.acceptInvitation || response.data.refreshToken;",
+                      "    if (authData && authData.accessToken) {",
+                      "        pm.environment.set('access_token', authData.accessToken);",
+                      "        pm.environment.set('refresh_token', authData.refreshToken);",
+                      "        if (authData.user) {",
+                      "            pm.environment.set('user_id', authData.user.id);",
+                      "            pm.environment.set('company_id', authData.user.companyId);",
+                      "        }",
+                      "        console.log('\u2705 Tokens saved');",
+                      "    }",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "requestPasswordReset",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Requestpasswordreset {\n  requestPasswordReset\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "requestPasswordReset - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "resetPassword",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Resetpassword {\n  resetPassword\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "resetPassword - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "enable2FA",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Enable2fa {\n  enable2FA\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "enable2FA - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "verify2FA",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Verify2fa {\n  verify2FA\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "verify2FA - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "switchCompanyContext",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Switchcompanycontext {\n  switchCompanyContext\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "switchCompanyContext - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateCompany",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatecompany {\n  updateCompany\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateCompany - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteCompany",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletecompany {\n  deleteCompany\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteCompany - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateCompanyUser",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatecompanyuser {\n  updateCompanyUser\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateCompanyUser - 01. Authentication & User Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteCompanyUser",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletecompanyuser {\n  deleteCompanyUser\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteCompanyUser - 01. Authentication & User Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02. Asset Management",
+      "description": "Asset CRUD operations, SOPs, and incident plans management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "asset",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Asset {\n  asset\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "asset - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "assets",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Assets {\n  assets\n}",
+                    "variables": "{\n  \"filter\": {},\n  \"limit\": 10,\n  \"offset\": 0\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "assets - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "assetSOPs",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Assetsops {\n  assetSOPs\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "assetSOPs - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "assetIncidentPlans",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Assetincidentplans {\n  assetIncidentPlans\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "assetIncidentPlans - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "assetSOP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Assetsop {\n  assetSOP\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "assetSOP - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "assetIncidentPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Assetincidentplan {\n  assetIncidentPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "assetIncidentPlan - 02. Asset Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createAsset",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createasset {\n  createAsset\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createAsset - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateAsset",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateasset {\n  updateAsset\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateAsset - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteAsset",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteasset {\n  deleteAsset\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteAsset - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createAssetSOP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createassetsop {\n  createAssetSOP\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createAssetSOP - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "generateAssetSOP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Generateassetsop {\n  generateAssetSOP\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "generateAssetSOP - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateAssetSOP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateassetsop {\n  updateAssetSOP\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateAssetSOP - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteAssetSOP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteassetsop {\n  deleteAssetSOP\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteAssetSOP - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createAssetIncidentPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createassetincidentplan {\n  createAssetIncidentPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\",\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createAssetIncidentPlan - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "generateAssetIncidentPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Generateassetincidentplan {\n  generateAssetIncidentPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "generateAssetIncidentPlan - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateAssetIncidentPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateassetincidentplan {\n  updateAssetIncidentPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\",\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateAssetIncidentPlan - 02. Asset Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteAssetIncidentPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteassetincidentplan {\n  deleteAssetIncidentPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteAssetIncidentPlan - 02. Asset Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03. Location Management",
+      "description": "Location hierarchy management and asset-location relationships",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "locations",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Locations {\n  locations\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "locations - 03. Location Management"
+              },
+              "response": []
+            },
+            {
+              "name": "locationsTree",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Locationstree {\n  locationsTree\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "locationsTree - 03. Location Management"
+              },
+              "response": []
+            },
+            {
+              "name": "location",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Location {\n  location\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "location - 03. Location Management"
+              },
+              "response": []
+            },
+            {
+              "name": "getAssetsByLocationId",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Getassetsbylocationid {\n  getAssetsByLocationId\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "getAssetsByLocationId - 03. Location Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createLocation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createlocation {\n  createLocation\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createLocation - 03. Location Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateLocation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatelocation {\n  updateLocation\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateLocation - 03. Location Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteLocation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletelocation {\n  deleteLocation\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteLocation - 03. Location Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04. Master Data Management",
+      "description": "Master data for assets, work orders, manufacturers, and vendors",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "masterAssetCategories",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetcategories {\n  masterAssetCategories\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetCategories - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetcategory {\n  masterAssetCategory\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetPartFields",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetpartfields {\n  masterAssetPartFields\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetPartFields - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetPartField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetpartfield {\n  masterAssetPartField\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetPartField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetParts",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetparts {\n  masterAssetParts\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetParts - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetPart",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetpart {\n  masterAssetPart\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetPart - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetServiceTypes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetservicetypes {\n  masterAssetServiceTypes\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetServiceTypes - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetServiceType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassetservicetype {\n  masterAssetServiceType\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetServiceType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetTypeFields",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassettypefields {\n  masterAssetTypeFields\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetTypeFields - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetTypeField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassettypefield {\n  masterAssetTypeField\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetTypeField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetTypes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassettypes {\n  masterAssetTypes\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetTypes - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterAssetType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterassettype {\n  masterAssetType\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterAssetType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterManufacturers",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Mastermanufacturers {\n  masterManufacturers\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterManufacturers - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterManufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Mastermanufacturer {\n  masterManufacturer\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterManufacturer - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterVendors",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Mastervendors {\n  masterVendors\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterVendors - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterVendor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Mastervendor {\n  masterVendor\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterVendor - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderAssignmentTypes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderassignmenttypes {\n  masterWorkOrderAssignmentTypes\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderAssignmentTypes - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderAssignmentType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderassignmenttype {\n  masterWorkOrderAssignmentType\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderAssignmentType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderServiceCategories",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderservicecategories {\n  masterWorkOrderServiceCategories\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderServiceCategories - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderServiceCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderservicecategory {\n  masterWorkOrderServiceCategory\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderServiceCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderStages",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderstages {\n  masterWorkOrderStages\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderStages - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderStage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkorderstage {\n  masterWorkOrderStage\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderStage - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderTypes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkordertypes {\n  masterWorkOrderTypes\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderTypes - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterWorkOrderType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterworkordertype {\n  masterWorkOrderType\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterWorkOrderType - 04. Master Data Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createMasterAssetCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassetcategory {\n  createMasterAssetCategory\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassetcategory {\n  updateMasterAssetCategory\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassetcategory {\n  deleteMasterAssetCategory\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterAssetPartField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassetpartfield {\n  createMasterAssetPartField\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetPartField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetPartField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassetpartfield {\n  updateMasterAssetPartField\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetPartField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetPartField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassetpartfield {\n  deleteMasterAssetPartField\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetPartField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterAssetPart",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassetpart {\n  createMasterAssetPart\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetPart - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetPart",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassetpart {\n  updateMasterAssetPart\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetPart - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetPart",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassetpart {\n  deleteMasterAssetPart\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetPart - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterAssetServiceType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassetservicetype {\n  createMasterAssetServiceType\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetServiceType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetServiceType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassetservicetype {\n  updateMasterAssetServiceType\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetServiceType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetServiceType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassetservicetype {\n  deleteMasterAssetServiceType\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetServiceType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterAssetTypeField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassettypefield {\n  createMasterAssetTypeField\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetTypeField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetTypeField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassettypefield {\n  updateMasterAssetTypeField\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetTypeField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetTypeField",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassettypefield {\n  deleteMasterAssetTypeField\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetTypeField - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterAssetType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterassettype {\n  createMasterAssetType\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterAssetType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterAssetType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterassettype {\n  updateMasterAssetType\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterAssetType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterAssetType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterassettype {\n  deleteMasterAssetType\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterAssetType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterManufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmastermanufacturer {\n  createMasterManufacturer\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterManufacturer - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterManufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemastermanufacturer {\n  updateMasterManufacturer\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterManufacturer - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterManufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemastermanufacturer {\n  deleteMasterManufacturer\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterManufacturer - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterVendor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmastervendor {\n  createMasterVendor\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterVendor - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterVendor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemastervendor {\n  updateMasterVendor\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterVendor - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterVendor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemastervendor {\n  deleteMasterVendor\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterVendor - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterWorkOrderAssignmentType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterworkorderassignmenttype {\n  createMasterWorkOrderAssignmentType\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterWorkOrderAssignmentType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterWorkOrderAssignmentType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterworkorderassignmenttype {\n  updateMasterWorkOrderAssignmentType\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterWorkOrderAssignmentType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterWorkOrderAssignmentType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterworkorderassignmenttype {\n  deleteMasterWorkOrderAssignmentType\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterWorkOrderAssignmentType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterWorkOrderServiceCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterworkorderservicecategory {\n  createMasterWorkOrderServiceCategory\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterWorkOrderServiceCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterWorkOrderServiceCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterworkorderservicecategory {\n  updateMasterWorkOrderServiceCategory\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterWorkOrderServiceCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterWorkOrderServiceCategory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterworkorderservicecategory {\n  deleteMasterWorkOrderServiceCategory\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterWorkOrderServiceCategory - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterWorkOrderStage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterworkorderstage {\n  createMasterWorkOrderStage\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterWorkOrderStage - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterWorkOrderStage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterworkorderstage {\n  updateMasterWorkOrderStage\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterWorkOrderStage - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterWorkOrderStage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterworkorderstage {\n  deleteMasterWorkOrderStage\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterWorkOrderStage - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createMasterWorkOrderType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterworkordertype {\n  createMasterWorkOrderType\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterWorkOrderType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterWorkOrderType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterworkordertype {\n  updateMasterWorkOrderType\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterWorkOrderType - 04. Master Data Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterWorkOrderType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterworkordertype {\n  deleteMasterWorkOrderType\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterWorkOrderType - 04. Master Data Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05. Work Order Management",
+      "description": "Work order creation, assignment, and lifecycle management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "workOrder",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Workorder {\n  workOrder\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "workOrder - 05. Work Order Management"
+              },
+              "response": []
+            },
+            {
+              "name": "workOrders",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Workorders {\n  workOrders\n}",
+                    "variables": "{\n  \"filter\": {},\n  \"limit\": 10,\n  \"offset\": 0\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "workOrders - 05. Work Order Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createWorkOrder",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createworkorder {\n  createWorkOrder\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createWorkOrder - 05. Work Order Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateWorkOrder",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateworkorder {\n  updateWorkOrder\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateWorkOrder - 05. Work Order Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteWorkOrder",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteworkorder {\n  deleteWorkOrder\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteWorkOrder - 05. Work Order Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateWorkOrderStage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateworkorderstage {\n  updateWorkOrderStage\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateWorkOrderStage - 05. Work Order Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06. Ticket Management",
+      "description": "Support ticket and comment management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "tickets",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Tickets {\n  tickets\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "tickets - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "ticket",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Ticket {\n  ticket\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "ticket - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "ticketComments",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Ticketcomments {\n  ticketComments\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "ticketComments - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "ticketComment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Ticketcomment {\n  ticketComment\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "ticketComment - 06. Ticket Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createTicket",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createticket {\n  createTicket\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createTicket - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateTicket",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateticket {\n  updateTicket\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateTicket - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteTicket",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteticket {\n  deleteTicket\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteTicket - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createTicketComment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createticketcomment {\n  createTicketComment\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createTicketComment - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateTicketComment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateticketcomment {\n  updateTicketComment\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateTicketComment - 06. Ticket Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteTicketComment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteticketcomment {\n  deleteTicketComment\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteTicketComment - 06. Ticket Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "07. Maintenance Schedule Management",
+      "description": "Preventive maintenance scheduling and activity tracking",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "maintenanceSchedules",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Maintenanceschedules {\n  maintenanceSchedules\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "maintenanceSchedules - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            },
+            {
+              "name": "maintenanceSchedule",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Maintenanceschedule {\n  maintenanceSchedule\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "maintenanceSchedule - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createMaintenanceSchedules",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmaintenanceschedules {\n  createMaintenanceSchedules\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMaintenanceSchedules - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMaintenanceSchedules",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemaintenanceschedules {\n  updateMaintenanceSchedules\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMaintenanceSchedules - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMaintenanceSchedules",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemaintenanceschedules {\n  deleteMaintenanceSchedules\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMaintenanceSchedules - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            },
+            {
+              "name": "completeMaintenanceActivity",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Completemaintenanceactivity {\n  completeMaintenanceActivity\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "completeMaintenanceActivity - 07. Maintenance Schedule Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "08. File Management",
+      "description": "File upload, storage, and retrieval operations",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "file",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query File {\n  file\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "file - 08. File Management"
+              },
+              "response": []
+            },
+            {
+              "name": "getFilesByBelongsTo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Getfilesbybelongsto {\n  getFilesByBelongsTo\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "getFilesByBelongsTo - 08. File Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "generateUploadUrl",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Generateuploadurl {\n  generateUploadUrl\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "generateUploadUrl - 08. File Management"
+              },
+              "response": []
+            },
+            {
+              "name": "confirmUpload",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Confirmupload {\n  confirmUpload\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "confirmUpload - 08. File Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateFile",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatefile {\n  updateFile\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateFile - 08. File Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteFile",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletefile {\n  deleteFile\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteFile - 08. File Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "09. Plan Management",
+      "description": "Subscription plan management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "plans",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Plans {\n  plans\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "plans - 09. Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "plan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Plan {\n  plan\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "plan - 09. Plan Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createplan {\n  createPlan\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createPlan - 09. Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updatePlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateplan {\n  updatePlan\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updatePlan - 09. Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deletePlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteplan {\n  deletePlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deletePlan - 09. Plan Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "10. Company Plan Management",
+      "description": "Company subscription and billing management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "companyPlans",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyplans {\n  companyPlans\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyPlans - 10. Company Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "companyPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyplan {\n  companyPlan\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyPlan - 10. Company Plan Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createCompanyPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createcompanyplan {\n  createCompanyPlan\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createCompanyPlan - 10. Company Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateCompanyPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatecompanyplan {\n  updateCompanyPlan\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateCompanyPlan - 10. Company Plan Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteCompanyPlan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletecompanyplan {\n  deleteCompanyPlan\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteCompanyPlan - 10. Company Plan Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "11. AI Addon Management",
+      "description": "AI addon products and company subscriptions",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "aiAddons",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Aiaddons {\n  aiAddons\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "aiAddons - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "aiAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Aiaddon {\n  aiAddon\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "aiAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "companyAIAddons",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyaiaddons {\n  companyAIAddons\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyAIAddons - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "companyAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyaiaddon {\n  companyAIAddon\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createaiaddon {\n  createAIAddon\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updateaiaddon {\n  updateAIAddon\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deleteaiaddon {\n  deleteAIAddon\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "createCompanyAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createcompanyaiaddon {\n  createCompanyAIAddon\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createCompanyAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateCompanyAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatecompanyaiaddon {\n  updateCompanyAIAddon\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateCompanyAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteCompanyAIAddon",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletecompanyaiaddon {\n  deleteCompanyAIAddon\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteCompanyAIAddon - 11. AI Addon Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "12. AI Service & Credits",
+      "description": "AI document generation and credit management",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "aiAddons",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Aiaddons {\n  aiAddons\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "aiAddons - 12. AI Service & Credits"
+              },
+              "response": []
+            },
+            {
+              "name": "companyAIAddons",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyaiaddons {\n  companyAIAddons\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyAIAddons - 12. AI Service & Credits"
+              },
+              "response": []
+            },
+            {
+              "name": "creditUsageHistory",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Creditusagehistory {\n  creditUsageHistory\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "creditUsageHistory - 12. AI Service & Credits"
+              },
+              "response": []
+            },
+            {
+              "name": "checkCreditLimit",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Checkcreditlimit {\n  checkCreditLimit\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "checkCreditLimit - 12. AI Service & Credits"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "consumeCredits",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Consumecredits {\n  consumeCredits\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "consumeCredits - 12. AI Service & Credits"
+              },
+              "response": []
+            },
+            {
+              "name": "generateDocument",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Generatedocument {\n  generateDocument\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "generateDocument - 12. AI Service & Credits"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "13. Company AI Configuration",
+      "description": "Company-specific AI provider configuration",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "companyAiConfigs",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyaiconfigs {\n  companyAiConfigs\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyAiConfigs - 13. Company AI Configuration"
+              },
+              "response": []
+            },
+            {
+              "name": "companyAiConfig",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Companyaiconfig {\n  companyAiConfig\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "companyAiConfig - 13. Company AI Configuration"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createCompanyAIConfig",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createcompanyaiconfig {\n  createCompanyAIConfig\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createCompanyAIConfig - 13. Company AI Configuration"
+              },
+              "response": []
+            },
+            {
+              "name": "updateCompanyAIConfig",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatecompanyaiconfig {\n  updateCompanyAIConfig\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateCompanyAIConfig - 13. Company AI Configuration"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteCompanyAIConfig",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletecompanyaiconfig {\n  deleteCompanyAIConfig\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteCompanyAIConfig - 13. Company AI Configuration"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "14. Location Type Management",
+      "description": "Master location type definitions and hierarchy rules",
+      "item": [
+        {
+          "name": "Queries",
+          "item": [
+            {
+              "name": "masterLocationTypes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterlocationtypes {\n  masterLocationTypes\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterLocationTypes - 14. Location Type Management"
+              },
+              "response": []
+            },
+            {
+              "name": "masterLocationType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "query Masterlocationtype {\n  masterLocationType\n}",
+                    "variables": ""
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "masterLocationType - 14. Location Type Management"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Mutations",
+          "item": [
+            {
+              "name": "createMasterLocationType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Createmasterlocationtype {\n  createMasterLocationType\n}",
+                    "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "createMasterLocationType - 14. Location Type Management"
+              },
+              "response": []
+            },
+            {
+              "name": "updateMasterLocationType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Updatemasterlocationtype {\n  updateMasterLocationType\n}",
+                    "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "updateMasterLocationType - 14. Location Type Management"
+              },
+              "response": []
+            },
+            {
+              "name": "deleteMasterLocationType",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "graphql",
+                  "graphql": {
+                    "query": "mutation Deletemasterlocationtype {\n  deleteMasterLocationType\n}",
+                    "variables": "{\n  \"id\": \"example-id-here\"\n}"
+                  }
+                },
+                "url": {
+                  "raw": "{{graphql_url}}",
+                  "host": [
+                    "{{graphql_url}}"
+                  ]
+                },
+                "description": "deleteMasterLocationType - 14. Location Type Management"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

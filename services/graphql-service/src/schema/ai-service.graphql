@@ -1,0 +1,76 @@
+scalar JSON
+
+# ==================== AI Service Types ====================
+
+type AIAddonCreditUsage {
+  id: ID!
+  companyId: ID!
+  aiAddonId: ID!
+  companyAIAddonId: ID
+  creditsUsed: Int!
+  actionType: String!
+  featureUsed: String
+  performedBy: ID
+  metadata: JSON
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ConsumeCreditsResponse {
+  success: Boolean!
+  creditsDeducted: Int!
+  remainingCredits: String!
+}
+
+type GenerateDocumentResponse {
+  content: String!
+  provider: String!
+  model: String!
+  tokensUsed: Int
+}
+
+type CheckCreditLimitResponse {
+  hasCredits: Boolean!
+  remainingCredits: Int
+  addonName: String
+}
+
+# ==================== Input Types ====================
+
+input ConsumeCreditsInput {
+  featureName: String!
+  credits: Int!
+  metadata: JSON
+}
+
+input GenerateDocumentInput {
+  assetId: ID!
+  documentType: String!
+  instructions: String
+}
+
+# ==================== Queries ====================
+
+extend type Query {
+  # Get all available AI addons
+  aiAddons: [AIAddon!]!
+  
+  # Get company's AI addon subscriptions
+  companyAIAddons: [CompanyAIAddon!]!
+  
+  # Get credit usage history
+  creditUsageHistory(limit: Int, offset: Int): [AIAddonCreditUsage!]!
+  
+  # Check available credits
+  checkCreditLimit: CheckCreditLimitResponse!
+}
+
+# ==================== Mutations ====================
+
+extend type Mutation {
+  # Consume credits for a feature
+  consumeCredits(input: ConsumeCreditsInput!): ConsumeCreditsResponse!
+  
+  # Generate AI document (SOP or Incident Plan)
+  generateDocument(input: GenerateDocumentInput!): GenerateDocumentResponse!
+}

@@ -1,0 +1,166 @@
+scalar JSON
+
+# ==================== Enums ====================
+
+enum PricingType {
+  subscription
+  pay_as_you_go
+}
+
+enum PlanInterval {
+  month
+  year
+}
+
+enum SubscriptionStatus {
+  active
+  cancelled
+  expired
+  past_due
+  trialing
+}
+
+# ==================== AI Addon Types ====================
+
+type AIAddon {
+  id: ID!
+  name: String!
+  description: String
+  pricingType: PricingType!
+  amount: Float!
+  currency: String!
+  interval: PlanInterval
+  intervalCount: Int
+  creditPoolSize: Int
+  credits: Int
+  stripeProductId: String
+  stripePriceId: String
+  eligiblePlanIds: [ID!]
+  active: Boolean!
+  type: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+type CompanyAIAddon {
+  id: ID!
+  companyId: ID!
+  aiAddonId: ID!
+  stripeSubscriptionId: String
+  stripeCustomerId: String
+  creditsRemaining: Int
+  creditsUsed: Int
+  status: SubscriptionStatus!
+  startDate: String!
+  nextBillingDate: String
+  endsOn: String
+  createdAt: String!
+  updatedAt: String!
+  aiAddon: AIAddon
+  company: Company
+}
+
+
+
+# ==================== Input Types ====================
+
+input CreateAIAddonInput {
+  name: String!
+  description: String
+  pricingType: PricingType!
+  amount: Float!
+  currency: String
+  interval: PlanInterval
+  intervalCount: Int
+  creditPoolSize: Int
+  credits: Int
+  stripeProductId: String
+  stripePriceId: String
+  eligiblePlanIds: [ID!]
+  active: Boolean
+  type: String
+}
+
+input UpdateAIAddonInput {
+  id: ID!
+  name: String
+  description: String
+  pricingType: PricingType
+  amount: Float
+  currency: String
+  interval: PlanInterval
+  intervalCount: Int
+  creditPoolSize: Int
+  credits: Int
+  stripeProductId: String
+  stripePriceId: String
+  eligiblePlanIds: [ID!]
+  active: Boolean
+  type: String
+}
+
+input DeleteAIAddonInput {
+  id: ID!
+}
+
+input CreateCompanyAIAddonInput {
+  companyId: ID!
+  aiAddonId: ID!
+  stripeSubscriptionId: String
+  stripeCustomerId: String
+  creditsRemaining: Int
+  creditsUsed: Int
+  status: SubscriptionStatus
+  startDate: String
+  nextBillingDate: String
+  endsOn: String
+}
+
+input UpdateCompanyAIAddonInput {
+  id: ID!
+  stripeSubscriptionId: String
+  stripeCustomerId: String
+  creditsRemaining: Int
+  creditsUsed: Int
+  status: SubscriptionStatus
+  nextBillingDate: String
+  endsOn: String
+}
+
+input DeleteCompanyAIAddonInput {
+  id: ID!
+}
+
+# ==================== Response Types ====================
+
+type DeleteResponse {
+  success: Boolean!
+  message: String!
+}
+
+# ==================== Queries ====================
+
+extend type Query {
+  # AI Addons
+  aiAddons: [AIAddon!]!
+  aiAddon(id: ID!): AIAddon
+  
+  # Company AI Addons
+  companyAIAddons(companyId: ID): [CompanyAIAddon!]!
+  companyAIAddon(id: ID!): CompanyAIAddon
+}
+
+# ==================== Mutations ====================
+
+extend type Mutation {
+  # AI Addons
+  createAIAddon(input: CreateAIAddonInput!): AIAddon!
+  updateAIAddon(input: UpdateAIAddonInput!): AIAddon!
+  deleteAIAddon(input: DeleteAIAddonInput!): DeleteResponse!
+  
+  # Company AI Addons
+  createCompanyAIAddon(input: CreateCompanyAIAddonInput!): CompanyAIAddon!
+  updateCompanyAIAddon(input: UpdateCompanyAIAddonInput!): CompanyAIAddon!
+  deleteCompanyAIAddon(input: DeleteCompanyAIAddonInput!): DeleteResponse!
+}

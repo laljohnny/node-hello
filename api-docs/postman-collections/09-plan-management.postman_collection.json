@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "category-09",
+    "name": "GraphQL API - 09. Plan Management",
+    "description": "# 09. Plan Management\n\nSubscription plan management\n\n## \ud83d\udd10 Authentication\n1. Import `GraphQL-Environment.postman_environment.json`\n2. Set `{{graphql_url}}` in environment\n3. Run login/signup from Authentication collection\n4. Tokens are automatically saved and used\n\n## \ud83d\udcca APIs in this collection\n- **Queries**: 2\n- **Mutations**: 3\n\n## \ud83d\udd17 Related Collections\nThis is a focused collection for 09. Plan Management. For complete API reference, see the master collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Queries",
+      "item": [
+        {
+          "name": "plans",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Plans {\n  plans\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "plans - 09. Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query Plan {\n  plan\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "plan - 09. Plan Management"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Mutations",
+      "item": [
+        {
+          "name": "createPlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Createplan {\n  createPlan\n}",
+                "variables": "{\n  \"input\": {\n    \"example\": \"Add your input fields here\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "createPlan - 09. Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "updatePlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Updateplan {\n  updatePlan\n}",
+                "variables": "{\n  \"input\": {\n    \"id\": \"id-to-update\",\n    \"example\": \"Add fields to update\"\n  }\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "updatePlan - 09. Plan Management"
+          },
+          "response": []
+        },
+        {
+          "name": "deletePlan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Deleteplan {\n  deletePlan\n}",
+                "variables": "{\n  \"id\": \"example-id-here\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{graphql_url}}",
+              "host": [
+                "{{graphql_url}}"
+              ]
+            },
+            "description": "deletePlan - 09. Plan Management"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

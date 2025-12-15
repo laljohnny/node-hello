@@ -1,0 +1,52 @@
+enum RequestStatus {
+  draft
+  in_review
+  published
+}
+
+type MasterDataRequest {
+  id: ID!
+  type: String!
+  requestJson: JSON!
+  requestBy: String
+  userId: ID
+  companyId: ID
+  company: Company
+  status: RequestStatus!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateMasterDataRequestInput {
+  type: String!
+  requestJson: JSON!
+  requestBy: String
+  userId: ID
+  status: RequestStatus = draft
+}
+
+input UpdateMasterDataRequestInput {
+  id: ID!
+  type: String
+  requestJson: JSON
+  requestBy: String
+  userId: ID
+  status: RequestStatus
+}
+
+input DeleteMasterDataRequestInput {
+  id: ID!
+}
+
+extend type Query {
+  masterDataRequests(status: RequestStatus, userId: ID): [MasterDataRequest!]!
+  masterDataRequest(id: ID!): MasterDataRequest
+}
+
+extend type Mutation {
+  createMasterDataRequest(input: CreateMasterDataRequestInput!): MasterDataRequest!
+  updateMasterDataRequest(input: UpdateMasterDataRequestInput!): MasterDataRequest!
+  deleteMasterDataRequest(input: DeleteMasterDataRequestInput!): Boolean!
+}
+

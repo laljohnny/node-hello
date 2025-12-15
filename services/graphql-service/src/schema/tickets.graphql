@@ -1,0 +1,115 @@
+type TicketUser {
+  id: ID!
+  firstName: String
+  lastName: String
+  fullName: String
+}
+
+type Ticket {
+  id: ID!
+  short_code: String!
+  parent_ticket: ID
+  company_id: ID
+  created_by: ID!
+  title: String!
+  description: String
+  priority: String!
+  category: String!
+  sub_category: String
+  status: String!
+  estimated_time: Int
+  start_date: String
+  end_date: String
+  assigned_to: TicketUser
+  assigned_by: TicketUser
+  assigned_at: String
+  resolved_at: String
+  closed_at: String
+  created_at: String!
+  updated_at: String!
+  deleted_at: String
+}
+
+input CreateTicketInput {
+  parent_ticket: ID
+  title: String!
+  description: String
+  priority: String
+  category: String!
+  sub_category: String
+  estimated_time: Int
+  start_date: String
+  end_date: String
+  assigned_to: ID
+}
+
+input UpdateTicketInput {
+  id: ID!
+  title: String
+  description: String
+  priority: String
+  category: String
+  sub_category: String
+  status: String
+  estimated_time: Int
+  start_date: String
+  end_date: String
+  assigned_to: ID
+}
+
+input DeleteTicketInput {
+  id: ID!
+}
+
+type DeleteTicketResponse {
+  success: Boolean!
+  message: String!
+}
+
+type TicketComment {
+  id: ID!
+  ticket_id: ID!
+  user_id: ID!
+  user_schema: String
+  user_name: String!
+  user_email: String
+  comment: String!
+  created_at: String!
+  updated_at: String!
+  deleted_at: String
+}
+
+input CreateTicketCommentInput {
+  ticket_id: ID!
+  comment: String!
+}
+
+input UpdateTicketCommentInput {
+  id: ID!
+  comment: String!
+}
+
+input DeleteTicketCommentInput {
+  id: ID!
+}
+
+type DeleteTicketCommentResponse {
+  success: Boolean!
+  message: String!
+}
+
+extend type Query {
+  tickets(status: String, category: String): [Ticket!]!
+  ticket(id: ID!): Ticket
+  ticketComments(ticket_id: ID!): [TicketComment!]!
+  ticketComment(id: ID!): TicketComment
+}
+
+extend type Mutation {
+  createTicket(input: CreateTicketInput!): Ticket!
+  updateTicket(input: UpdateTicketInput!): Ticket!
+  deleteTicket(input: DeleteTicketInput!): DeleteTicketResponse!
+  createTicketComment(input: CreateTicketCommentInput!): TicketComment!
+  updateTicketComment(input: UpdateTicketCommentInput!): TicketComment!
+  deleteTicketComment(input: DeleteTicketCommentInput!): DeleteTicketCommentResponse!
+}

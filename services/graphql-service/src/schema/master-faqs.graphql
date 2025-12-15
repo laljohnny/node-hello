@@ -1,0 +1,56 @@
+enum AppliesTo {
+  product_type
+  product
+}
+
+type MasterFAQ {
+  id: ID!
+  appliesTo: AppliesTo!
+  referenceId: ID!
+  reference: JSON
+  question: String!
+  answer: String!
+  tags: JSON
+  displayOrder: Int!
+  isActive: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateMasterFAQInput {
+  appliesTo: AppliesTo!
+  referenceId: ID!
+  question: String!
+  answer: String!
+  tags: JSON
+  displayOrder: Int = 0
+  isActive: Boolean = true
+}
+
+input UpdateMasterFAQInput {
+  id: ID!
+  appliesTo: AppliesTo
+  referenceId: ID
+  question: String
+  answer: String
+  tags: JSON
+  displayOrder: Int
+  isActive: Boolean
+}
+
+input DeleteMasterFAQInput {
+  id: ID!
+}
+
+extend type Query {
+  masterFAQs(appliesTo: AppliesTo, referenceId: ID, isActive: Boolean): [MasterFAQ!]!
+  masterFAQ(id: ID!): MasterFAQ
+}
+
+extend type Mutation {
+  createMasterFAQ(input: CreateMasterFAQInput!): MasterFAQ!
+  updateMasterFAQ(input: UpdateMasterFAQInput!): MasterFAQ!
+  deleteMasterFAQ(input: DeleteMasterFAQInput!): Boolean!
+}
+

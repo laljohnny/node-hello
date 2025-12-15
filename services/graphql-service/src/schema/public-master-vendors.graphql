@@ -1,0 +1,66 @@
+enum VendorType {
+  maintenance_provider
+  procurement_partner
+  both
+}
+
+type PublicMasterVendor {
+  id: ID!
+  addedByCompanyId: ID
+  vendorCompanyName: String
+  website: String
+  email: String
+  name: String
+  phoneNumber: String
+  countryCode: String
+  vendorType: VendorType
+  canLogin: Boolean
+  invitedByUser: ID
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+}
+
+input CreatePublicMasterVendorInput {
+  id: ID!
+  addedByCompanyId: ID
+  vendorCompanyName: String
+  website: String
+  email: String
+  name: String
+  phoneNumber: String
+  countryCode: String
+  vendorType: VendorType
+  canLogin: Boolean
+  invitedByUser: ID
+}
+
+input UpdatePublicMasterVendorInput {
+  id: ID!
+  addedByCompanyId: ID
+  vendorCompanyName: String
+  website: String
+  email: String
+  name: String
+  phoneNumber: String
+  countryCode: String
+  vendorType: VendorType
+  canLogin: Boolean
+  invitedByUser: ID
+}
+
+input DeletePublicMasterVendorInput {
+  id: ID!
+}
+
+extend type Query {
+  publicMasterVendors(addedByCompanyId: ID, vendorType: VendorType): [PublicMasterVendor!]!
+  publicMasterVendor(id: ID!): PublicMasterVendor
+}
+
+extend type Mutation {
+  createPublicMasterVendor(input: CreatePublicMasterVendorInput!): PublicMasterVendor!
+  updatePublicMasterVendor(input: UpdatePublicMasterVendorInput!): PublicMasterVendor!
+  deletePublicMasterVendor(input: DeletePublicMasterVendorInput!): Boolean!
+}
+

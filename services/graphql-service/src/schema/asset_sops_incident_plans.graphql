@@ -1,0 +1,92 @@
+type AssetSOPIncidentPlan {
+  id: ID!
+  assetId: ID!
+  asset: Asset
+  docType: SOPIncidentPlanDocType!
+  title: String!
+  content: String
+  contentType: ContentType
+  fileId: ID
+  file: File
+  source: ContentSource
+  aiMetadata: JSON
+  version: Int
+  isActive: Boolean
+  actionType: SOPActionType
+  masterSOPIncidentPlanId: ID
+  createdBy: ID
+  createdByUser: User
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+enum SOPActionType {
+  new
+  extend
+}
+
+enum SOPIncidentPlanDocType {
+  sop
+  incident_plan
+}
+
+enum ContentType {
+  text
+  file
+}
+
+enum ContentSource {
+  manual
+  upload
+  ai
+}
+
+input CreateAssetSOPIncidentPlanInput {
+  assetId: ID!
+  docType: SOPIncidentPlanDocType!
+  title: String!
+  content: String
+  contentType: ContentType
+  fileId: ID
+  source: ContentSource
+  aiMetadata: JSON
+  version: Int
+  isActive: Boolean
+  actionType: SOPActionType
+  masterSOPIncidentPlanId: ID
+}
+
+input UpdateAssetSOPIncidentPlanInput {
+  title: String
+  content: String
+  contentType: ContentType
+  fileId: ID
+  source: ContentSource
+  aiMetadata: JSON
+  version: Int
+  isActive: Boolean
+  actionType: SOPActionType
+  masterSOPIncidentPlanId: ID
+}
+
+input AssetSOPIncidentPlanFilterInput {
+  assetId: ID
+  docType: SOPIncidentPlanDocType
+  isActive: Boolean
+  searchTerm: String
+}
+
+type Query {
+  # Get single record
+  assetSOPIncidentPlan(id: ID!): AssetSOPIncidentPlan
+
+  # List records with filtering
+  assetSOPIncidentPlans(assetId: ID, filter: AssetSOPIncidentPlanFilterInput, limit: Int, offset: Int): [AssetSOPIncidentPlan!]!
+}
+
+type Mutation {
+  createAssetSOPIncidentPlan(input: CreateAssetSOPIncidentPlanInput!): AssetSOPIncidentPlan!
+  updateAssetSOPIncidentPlan(id: ID!, input: UpdateAssetSOPIncidentPlanInput!): AssetSOPIncidentPlan!
+  deleteAssetSOPIncidentPlan(id: ID!): Boolean!
+}

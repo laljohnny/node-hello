@@ -1,0 +1,195 @@
+type WorkOrder {
+  id: ID!
+  title: String!
+  description: String
+  severity: WorkOrderSeverity!
+  locationId: ID
+  parentId: ID
+  workOrderType: WorkOrderType
+  workOrderServiceCategory: WorkOrderServiceCategory
+  workOrderStageId: ID
+  startDate: String
+  endDate: String
+  timeZone: String!
+  attachments: [ID!]!
+  createdBy: ID
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  executionPriority: WorkOrderPriority!
+
+  # Relations
+  location: Location
+  workOrderStage: MasterWorkOrderStage
+  workOrderAssets: [WorkOrderAsset!]!
+  workOrderAssignments: [WorkOrderAssignment!]!
+  parent: WorkOrder
+}
+
+type WorkOrderAsset {
+  id: ID!
+  workOrderId: ID!
+  assetId: ID!
+  assetServiceTypeId: ID
+  assetPartIds: [ID!]!
+  sopIds: [ID!]!
+  incidentPlanIds: [ID!]!
+  assetFileIds: [ID!]!
+  locationFileIds: [ID!]!
+  createdAt: String!
+  locationId: ID
+  locationType: ID
+  locationTypeName: String
+
+  # Relations
+  asset: Asset
+  assetServiceType: MasterAssetServiceType
+}
+
+type WorkOrderAssignment {
+  id: ID!
+  workOrderId: ID!
+  userIds: [ID!]!
+  assignmentType: WorkOrderAssignmentType
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+
+  # Relations
+  users: [User!]!
+}
+
+# Extend Location type (defined in location.graphql)
+extend type Location {
+  workOrders: [WorkOrder!]
+}
+
+# Extend Asset type (defined in asset.graphql)
+extend type Asset {
+  workOrders: [WorkOrder!]
+}
+
+# Extend User type (defined in auth.graphql)
+extend type User {
+  workOrders: [WorkOrder!]
+}
+
+enum WorkOrderSeverity {
+  low
+  medium
+  high
+  critical
+}
+
+enum WorkOrderPriority {
+  low
+  medium
+  high
+  critical
+}
+
+enum WorkOrderType {
+  preventive_maintenance
+  corrective_maintenance
+  installation
+  emergency
+}
+
+enum WorkOrderServiceCategory {
+  hvac
+  electrical
+  plumbing
+}
+
+enum WorkOrderAssignmentType {
+  maintenance
+  installation
+  inspection
+}
+
+input WorkOrderAssetInput {
+  id: ID # Optional: if provided, update existing; if not, create new
+  assetId: ID!
+  assetServiceTypeId: ID
+  assetPartIds: [ID!]
+  sopIds: [ID!]
+  incidentPlanIds: [ID!]
+  assetFileIds: [ID!]
+  locationFileIds: [ID!]
+}
+
+input WorkOrderAssignmentInput {
+  id: ID # Optional: if provided, update existing; if not, create new
+  userIds: [ID!]!
+  assignmentType: WorkOrderAssignmentType!
+}
+
+input CreateWorkOrderInput {
+  title: String!
+  description: String
+  severity: WorkOrderSeverity
+  locationId: ID!
+  workOrderAssets: [WorkOrderAssetInput!]
+  workOrderType: WorkOrderType!
+  workOrderServiceCategory: WorkOrderServiceCategory!
+  workOrderAssignments: [WorkOrderAssignmentInput!]!
+  executionPriority: WorkOrderPriority
+  timeZone: String
+  startDate: String
+  endDate: String
+  attachments: [ID!]
+  fileUploads: [FileUploadInput!]
+}
+
+
+input UpdateWorkOrderInput {
+  id: ID!
+  title: String
+  description: String
+  severity: WorkOrderSeverity
+  locationId: ID
+  workOrderType: WorkOrderType
+  workOrderServiceCategory: WorkOrderServiceCategory
+  workOrderStageId: ID
+  executionPriority: WorkOrderPriority
+  timeZone: String
+  startDate: String
+  endDate: String
+  attachments: [ID!]
+  fileUploads: [FileUploadInput!]
+  workOrderAssets: [WorkOrderAssetInput!]
+  workOrderAssignments: [WorkOrderAssignmentInput!]
+}
+
+
+input WorkOrderFilter {
+  locationId: ID
+  workOrderType: WorkOrderType
+  workOrderServiceCategory: WorkOrderServiceCategory
+  workOrderStageId: ID
+  severity: WorkOrderSeverity
+  executionPriority: WorkOrderPriority
+  createdBy: ID
+  search: String
+}
+
+type WorkOrderConnection {
+  nodes: [WorkOrder!]!
+  totalCount: Int!
+}
+
+extend type Query {
+  workOrder(id: ID!): WorkOrder
+  workOrders(
+    filter: WorkOrderFilter
+    limit: Int
+    offset: Int
+  ): WorkOrderConnection!
+}
+
+extend type Mutation {
+  createWorkOrder(input: CreateWorkOrderInput!): WorkOrder!
+  updateWorkOrder(input: UpdateWorkOrderInput!): WorkOrder!
+  deleteWorkOrder(id: ID!): Boolean!
+  updateWorkOrderStage(workOrderId: ID!, stageId: ID!): WorkOrder!
+}

@@ -1,0 +1,56 @@
+type ProductCategory {
+  id: ID!
+  parentId: ID
+  parent: ProductCategory
+  children: [ProductCategory!]!
+  name: String!
+  description: String
+  isActive: Boolean!
+  iconName: String
+  iconColor: String
+  iconType: String
+  iconUrl: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateProductCategoryInput {
+  parentId: ID
+  name: String!
+  description: String
+  isActive: Boolean = true
+  iconName: String
+  iconColor: String
+  iconType: String
+  iconUrl: String
+}
+
+input UpdateProductCategoryInput {
+  id: ID!
+  parentId: ID
+  name: String
+  description: String
+  isActive: Boolean
+  iconName: String
+  iconColor: String
+  iconType: String
+  iconUrl: String
+}
+
+input DeleteProductCategoryInput {
+  id: ID!
+}
+
+extend type Query {
+  productCategories: [ProductCategory!]!
+  productCategoriesTree: JSON!
+  productCategory(id: ID!): ProductCategory
+}
+
+extend type Mutation {
+  createProductCategory(input: CreateProductCategoryInput!): ProductCategory!
+  updateProductCategory(input: UpdateProductCategoryInput!): ProductCategory!
+  deleteProductCategory(input: DeleteProductCategoryInput!): Boolean!
+}
+

@@ -1,0 +1,83 @@
+enum DocumentType {
+  SOP
+  Incident_Plan
+  Maintenance_Guide
+  Safety_Protocol
+  User_Manual
+}
+
+enum ContentSource {
+  manual
+  ai
+  upload
+  external_url
+}
+
+enum ContentType {
+  text
+  file
+  url
+}
+
+type MasterSOPIncidentPlan {
+  id: ID!
+  title: String!
+  documentType: DocumentType!
+  appliesTo: AppliesTo!
+  referenceId: ID!
+  reference: JSON
+  content: String
+  documentUrl: String
+  source: ContentSource
+  contentType: ContentType
+  isActive: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateMasterSOPIncidentPlanInput {
+  title: String!
+  documentType: DocumentType!
+  appliesTo: AppliesTo!
+  referenceId: ID!
+  content: String
+  documentUrl: String
+  source: ContentSource
+  contentType: ContentType
+  isActive: Boolean = true
+}
+
+input UpdateMasterSOPIncidentPlanInput {
+  id: ID!
+  title: String
+  documentType: DocumentType
+  appliesTo: AppliesTo
+  referenceId: ID
+  content: String
+  documentUrl: String
+  source: ContentSource
+  contentType: ContentType
+  isActive: Boolean
+}
+
+input DeleteMasterSOPIncidentPlanInput {
+  id: ID!
+}
+
+extend type Query {
+  masterSOPIncidentPlans(
+    appliesTo: AppliesTo
+    referenceId: ID
+    documentType: DocumentType
+    isActive: Boolean
+  ): [MasterSOPIncidentPlan!]!
+  masterSOPIncidentPlan(id: ID!): MasterSOPIncidentPlan
+}
+
+extend type Mutation {
+  createMasterSOPIncidentPlan(input: CreateMasterSOPIncidentPlanInput!): MasterSOPIncidentPlan!
+  updateMasterSOPIncidentPlan(input: UpdateMasterSOPIncidentPlanInput!): MasterSOPIncidentPlan!
+  deleteMasterSOPIncidentPlan(input: DeleteMasterSOPIncidentPlanInput!): Boolean!
+}
+

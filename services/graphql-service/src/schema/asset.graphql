@@ -1,0 +1,454 @@
+scalar JSON
+
+# ==================== Company Product Types ====================
+
+type CompanyProduct {
+  id: ID!
+  parentId: ID
+  categoryId: ID
+  categoryName: String
+  typeId: ID
+  typeName: String
+  manufacturerId: ID
+  manufacturerName: String
+  successorId: ID
+  predecessorId: ID
+  name: String!
+  make: String
+  model: String
+  serialNumber: String
+  dataSheet: String
+  lifespan: Float
+  rating: Float
+  specifications: JSON
+  images: [String!]
+  description: String
+  lifecycleStatus: String
+  manufacturerStatus: String
+  isActive: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  
+  # Asset-related fields
+  isAddedAsset: Boolean!
+  assets: [ProductAsset!]!
+}
+
+type ProductAsset {
+  id: ID!
+  name: String!
+  description: String
+  locationIds: [ID!]!
+  locations: [Location!]
+  status: String
+  installationYear: Int
+  serialNumber: String
+  createdBy: ID
+  createdAt: String!
+  locationAddress: String
+  maintenanceSchedules: [AssetMaintenanceSchedule!]!
+}
+
+type CompanyProductsResponse {
+  products: [CompanyProduct!]!
+  total: Int!
+}
+
+input CompanyProductFilterInput {
+  # Location filters
+  locationIds: [ID!]
+  
+  # Asset filters
+  assetId: ID
+  installationDateFrom: String
+  installationDateTo: String
+  installationYear: Int
+  
+  # Product filters
+  productTypeIds: [ID!]
+  productCategoryIds: [ID!]
+  manufacturerIds: [ID!]
+  make: [String!]
+  model: [String!]
+  
+  # User filters
+  createdByUserIds: [ID!]
+  assignedToUserIds: [ID!]
+  
+  # Helper filters
+  isAssetAdded: Boolean
+}
+
+# ==================== Asset Types ====================
+
+type Asset {
+  id: ID!
+  name: String!
+  description: String
+  productId: ID!
+  serialNumber: String
+  installationDate: String
+  locationIds: [ID!]!
+  locations: [Location!]
+  fileIds: [ID!]!
+  files: [File!]
+  maintenanceIds: [ID!]!
+  userIds: [ID!]!
+  responsibleUsers: [User!]
+  users: [User!]
+  position: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  
+  # Nested relationships
+  assetParts: [AssetPart!]
+  assetFieldValues: [AssetFieldValue!]
+  assetRelations: [AssetRelation!]
+  maintenanceSchedules: [AssetMaintenanceSchedule!]
+  assetMaintenanceSchedules: [AssetMaintenanceSchedule!]
+  sops: [AssetSOP!]
+  incidentPlans: [AssetIncidentPlan!]
+  assetSOPIncidentPlans: [AssetSOPIncidentPlan!]
+  workOrderDetails: [AssetWorkOrderDetail!]
+  product: CompanyProduct
+}
+
+type AssetWorkOrderDetail {
+  id: ID!
+  title: String!
+  description: String
+  severity: String!
+  locationId: ID
+  parentId: ID
+  workOrderType: String
+  workOrderServiceCategory: String
+  workOrderStageId: ID
+  startDate: String
+  endDate: String
+  timeZone: String!
+  attachments: [ID!]!
+  createdBy: ID
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  executionPriority: String!
+  assignments: [AssetWorkOrderAssignment!]!
+}
+
+type AssetWorkOrderAssignment {
+  id: ID!
+  workOrderId: ID!
+  userIds: [ID!]!
+  assignmentType: String
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  users: [User!]!
+}
+
+type AssetPart {
+  id: ID!
+  assetId: ID!
+  masterAssetPartId: ID!
+  masterAssetPart: MasterAssetPart
+  serialNumber: String
+  manufacturerId: ID
+  purchaseDate: String
+  warrantyExpiresOn: String
+  status: String!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  
+  # Field values for this part
+  fieldValues: [AssetPartFieldValue!]
+}
+
+type AssetFieldValue {
+  id: ID!
+  assetId: ID!
+  assetFieldId: ID!
+  assetField: MasterAssetTypeField
+  fieldValue: JSON
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+type AssetPartFieldValue {
+  id: ID!
+  assetPartId: ID!
+  assetPartFieldId: ID!
+  assetPartField: MasterAssetPartField
+  value: JSON
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+type AssetRelation {
+  id: ID!
+  assetId: ID!
+  fedFromId: ID!
+  fedFromAsset: Asset
+  fedFromPartId: ID
+  fedFromPart: AssetPart
+  createdAt: String!
+}
+
+type AssetMaintenanceSchedule {
+  id: ID!
+  assetId: ID!
+  assetParts: [AssetPart!]
+  title: String!
+  description: String
+  startDate: String!
+  nextDueDate: String
+  assignedToUserIds: [ID!]!
+  assignedToUsers: [User!]!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+type AssetSOP {
+  id: ID!
+  assetId: ID!
+  asset: Asset
+  title: String!
+  content: String
+  contentType: String!
+  fileId: ID
+  file: File
+  source: String!
+  aiMetadata: JSON
+  version: Int!
+  isActive: Boolean!
+  createdBy: ID
+  createdByUser: User
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+type AssetIncidentPlan {
+  id: ID!
+  assetId: ID!
+  asset: Asset
+  title: String!
+  content: String
+  contentType: String!
+  fileId: ID
+  file: File
+  source: String!
+  aiMetadata: JSON
+  version: Int!
+  isActive: Boolean!
+  createdBy: ID
+  createdByUser: User
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+
+
+# ==================== Input Types ====================
+
+input CreateAssetInput {
+  name: String
+  description: String
+  productId: ID!
+  serialNumber: String
+  installationDate: String!
+  locationIds: [ID!]
+  fileIds: [ID!]
+  position: String
+  
+  # Asset parts
+  assetParts: [AssetPartInput!]
+    
+  # Asset relations (multiple connections)
+  assetRelations: [AssetRelationInput!]
+  
+  # Maintenance schedules
+  maintenanceSchedules: [MaintenanceScheduleInput!]
+  
+  # Responsible users
+  responsibleUserIds: [ID!]
+}
+
+input UpdateAssetInput {
+  name: String
+  description: String
+  productId: ID
+  serialNumber: String
+  installationDate: String
+  locationIds: [ID!]
+  fileIds: [ID!]
+  position: String
+  
+  # Asset parts (will replace existing)
+  assetParts: [AssetPartInput!]
+  
+  # Asset relations (multiple connections, will replace existing)
+  assetRelations: [AssetRelationInput!]
+  
+  # Maintenance schedules (will replace existing)
+  maintenanceSchedules: [MaintenanceScheduleInput!]
+  
+  # Responsible users
+  responsibleUserIds: [ID!]
+}
+
+input AssetPartInput {
+  id: ID # For updates
+  masterAssetPartId: ID!
+  serialNumber: String
+  manufacturerId: ID
+  purchaseDate: String
+  warrantyExpiresOn: String
+  status: String
+  
+  # Part field values
+  partFields: [AssetPartFieldValueInput!]
+}
+
+input AssetFieldValueInput {
+  assetFieldId: ID!
+  fieldValue: JSON!
+}
+
+input AssetPartFieldValueInput {
+  assetPartFieldId: ID!
+  value: JSON!
+}
+
+input AssetRelationInput {
+  fedFromAssetId: ID!
+  fedFromAssetPartId: ID
+}
+
+input MaintenanceScheduleInput {
+  id: ID # For updates
+  title: String!
+  description: String
+  startDate: String!
+  nextDueDate: String
+  assignedToUserIds: [ID!]
+}
+
+input AssetFilterInput {
+  locationIds: [ID!]
+  userIds: [ID!]
+  createdByUserIds: [ID!]
+}
+
+# ==================== SOP & Incident Plan Inputs ====================
+
+input CreateSOPInput {
+  assetId: ID!
+  title: String!
+  content: String
+  contentType: String! # "text" or "file"
+  fileId: ID
+  fileUpload: FileUploadInput
+  source: String! # "manual" or "upload"
+}
+
+
+input GenerateSOPInput {
+  assetId: ID!
+  instructions: String
+}
+
+input UpdateSOPInput {
+  title: String
+  content: String
+  contentType: String
+  fileId: ID
+  fileUpload: FileUploadInput
+  source: String # "manual", "upload", or "ai"
+  isActive: Boolean
+}
+
+
+input CreateIncidentPlanInput {
+  assetId: ID!
+  title: String!
+  content: String
+  contentType: String! # "text" or "file"
+  fileId: ID
+  source: String! # "manual" or "upload"
+}
+
+input GenerateIncidentPlanInput {
+  assetId: ID!
+  instructions: String
+}
+
+input UpdateIncidentPlanInput {
+  title: String
+  content: String
+  contentType: String
+  fileId: ID
+  source: String # "manual", "upload", or "ai"
+  isActive: Boolean
+}
+
+# ==================== Queries ====================
+
+type AssetsResponse {
+  assets: [Asset!]!
+  total: Int!
+}
+
+type Query {
+  # Get single asset with all related data
+  asset(id: ID!): Asset
+  
+  # List assets with filtering
+  assets(id: ID, filter: AssetFilterInput, limit: Int, offset: Int): AssetsResponse!
+  
+  # Get company products with asset information
+  getCompanyProducts(filter: CompanyProductFilterInput, limit: Int, offset: Int): CompanyProductsResponse!
+  
+  # Get SOPs for an asset
+  assetSOPs(assetId: ID!): [AssetSOP!]!
+  
+  # Get incident plans for an asset
+  assetIncidentPlans(assetId: ID!): [AssetIncidentPlan!]!
+  
+  # Get single SOP
+  assetSOP(id: ID!): AssetSOP
+  
+  # Get single incident plan
+  assetIncidentPlan(id: ID!): AssetIncidentPlan
+  
+
+
+
+}
+
+# ==================== Mutations ====================
+
+type Mutation {
+  # Asset CRUD
+  createAsset(input: CreateAssetInput!): Asset!
+  updateAsset(id: ID!, input: UpdateAssetInput!): Asset!
+  deleteAsset(id: ID!): Boolean!
+  
+  # SOP Management
+  createAssetSOP(input: CreateSOPInput!): AssetSOP!
+  generateAssetSOP(input: GenerateSOPInput!): AssetSOP!
+  updateAssetSOP(id: ID!, input: UpdateSOPInput!): AssetSOP!
+  deleteAssetSOP(id: ID!): Boolean!
+  
+  # Incident Plan Management
+  createAssetIncidentPlan(input: CreateIncidentPlanInput!): AssetIncidentPlan!
+  generateAssetIncidentPlan(input: GenerateIncidentPlanInput!): AssetIncidentPlan!
+  updateAssetIncidentPlan(id: ID!, input: UpdateIncidentPlanInput!): AssetIncidentPlan!
+  deleteAssetIncidentPlan(id: ID!): Boolean!
+}

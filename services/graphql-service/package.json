@@ -1,0 +1,33 @@
+{
+    "name": "graphql-service",
+    "version": "1.0.0",
+    "description": "GraphQL API for Critical Asset Management Platform",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "dev": "nodemon src/server.js",
+        "test": "jest",
+        "seed": "node src/scripts/seedSuperAdmin.js"
+    },
+    "dependencies": {
+        "@graphql-tools/graphql-file-loader": "^8.0.0",
+        "@graphql-tools/load": "^8.0.0",
+        "@sendgrid/mail": "^8.1.6",
+        "apollo-server-express": "^3.13.0",
+        "axios": "^1.6.7",
+        "bcrypt": "^6.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "graphql": "^16.8.1",
+        "helmet": "^7.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "moment-timezone": "^0.5.48",
+        "node-cron": "^3.0.3",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "nodemon": "^3.0.2"
+    }
+}

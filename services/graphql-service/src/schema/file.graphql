@@ -1,0 +1,79 @@
+type File {
+  id: ID!
+  file_name: String!
+  file_url: String!
+  mime_type: String
+  file_size: Int
+  folder_id: ID
+  belongs_to_type: String
+  belongs_to_id: ID
+  created_at: String
+  created_by: ID
+  upload_status: String
+  updated_at: String
+}
+
+type GenerateUploadUrlResponse {
+  uploadUrl: String!
+  fileKey: String!
+  fileId: String!
+}
+
+input GenerateUploadUrlInput {
+  fileName: String!
+  contentType: String!
+  folderId: ID
+}
+
+enum BelongsToType {
+  ASSET
+  LOCATION
+  ASSET_PART
+  WORK_ORDER
+  TICKET
+  SOP
+  INCIDENT_PLAN
+}
+
+input ConfirmUploadInput {
+  fileKey: String!
+  fileName: String!
+  contentType: String!
+  size: Int!
+  folderId: ID
+  belongsToType: BelongsToType
+  belongsToId: ID
+}
+
+input FileUploadInput {
+  fileKey: String!
+  fileName: String!
+  contentType: String!
+  size: Int!
+  folderId: ID
+}
+
+
+input DeleteFileInput {
+  fileId: ID!
+}
+
+input UpdateFileInput {
+  id: ID!
+  fileName: String
+  folderId: ID
+  belongsToType: BelongsToType
+  belongsToId: ID
+}
+
+extend type Query {
+  file(id: ID!): File
+  getFilesByBelongsTo(belongsToType: BelongsToType!, belongsToId: ID!): [File!]!
+}
+
+extend type Mutation {
+  generateUploadUrl(input: GenerateUploadUrlInput!): GenerateUploadUrlResponse
+  confirmUpload(input: ConfirmUploadInput!): File
+  updateFile(input: UpdateFileInput!): File
+  deleteFile(input: DeleteFileInput!): Boolean
+}

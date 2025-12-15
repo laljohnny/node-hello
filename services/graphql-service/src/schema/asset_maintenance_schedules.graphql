@@ -1,0 +1,56 @@
+type AssetMaintenanceSchedule {
+  id: ID!
+  assetId: ID!
+  asset: Asset
+  title: String
+  description: String
+  scheduleType: String
+  intervalUnit: String
+  startDate: String
+  nextDueDate: String
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+  intervalValue: Int!
+  timeZone: String
+  assignedToUserIds: [ID!]
+  assignedToUsers: [User!]
+}
+
+input CreateAssetMaintenanceScheduleInput {
+  assetId: ID!
+  title: String
+  description: String
+  scheduleType: String
+  intervalUnit: String
+  startDate: String!
+  nextDueDate: String
+  intervalValue: Int!
+  timeZone: String
+  assignedToUserIds: [ID!]
+}
+
+input UpdateAssetMaintenanceScheduleInput {
+  id: ID!
+  assetId: ID!
+  title: String
+  description: String
+  scheduleType: String
+  intervalUnit: String
+  startDate: String
+  nextDueDate: String
+  intervalValue: Int
+  timeZone: String
+  assignedToUserIds: [ID!]
+}
+
+extend type Query {
+  assetMaintenanceSchedules(assetId: ID!): [AssetMaintenanceSchedule!]!
+  assetMaintenanceSchedule(id: ID!): AssetMaintenanceSchedule
+}
+
+extend type Mutation {
+  createAssetMaintenanceSchedule(input: CreateAssetMaintenanceScheduleInput!): AssetMaintenanceSchedule!
+  updateAssetMaintenanceSchedule(input: UpdateAssetMaintenanceScheduleInput!): AssetMaintenanceSchedule!
+  deleteAssetMaintenanceSchedule(id: ID!): Boolean!
+}

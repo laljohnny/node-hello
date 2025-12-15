@@ -1,0 +1,69 @@
+type Plan {
+  id: ID!
+  name: String!
+  description: String
+  amount: Float!
+  currency: String!
+  interval: String!
+  interval_count: Int!
+  features: JSON
+  limits: JSON
+  active: Boolean!
+  is_default: Boolean
+  prorata_amount: Float
+  stripe_product_id: String!
+  stripe_price_id: String!
+  created_at: String!
+  updated_at: String!
+  deleted_at: String
+}
+
+input CreatePlanInput {
+  name: String!
+  description: String
+  amount: Float!
+  currency: String
+  interval: String!
+  interval_count: Int
+  features: JSON
+  limits: JSON
+  is_default: Boolean
+  prorata_amount: Float
+}
+
+input UpdatePlanInput {
+  id: ID!
+  name: String
+  description: String
+  amount: Float
+  currency: String
+  interval: String
+  interval_count: Int
+  features: JSON
+  limits: JSON
+  active: Boolean
+  is_default: Boolean
+  prorata_amount: Float
+}
+
+input DeletePlanInput {
+  id: ID!
+}
+
+type DeletePlanResponse {
+  success: Boolean!
+  message: String!
+}
+
+type Query {
+  plans: [Plan!]!
+  plan(id: ID!): Plan
+}
+
+type Mutation {
+  createPlan(input: CreatePlanInput!): Plan!
+  updatePlan(input: UpdatePlanInput!): Plan!
+  deletePlan(input: DeletePlanInput!): DeletePlanResponse!
+}
+
+scalar JSON

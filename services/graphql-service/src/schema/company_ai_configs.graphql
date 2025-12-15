@@ -1,0 +1,59 @@
+type CompanyAIConfigCompany {
+  id: ID!
+  name: String!
+  email: String!
+  sub_domain: String
+  role: String
+  active: Boolean
+}
+
+type CompanyAIConfig {
+  id: ID!
+  company_id: ID!
+  provider: String!
+  model: String
+  api_key: String
+  base_url: String
+  is_enabled: Boolean!
+  settings: JSON
+  created_at: String!
+  updated_at: String!
+  company: CompanyAIConfigCompany
+}
+
+input CreateCompanyAIConfigInput {
+  company_id: ID!
+  provider: String!
+  model: String
+  api_key: String
+  base_url: String
+  is_enabled: Boolean
+  settings: JSON
+}
+
+input UpdateCompanyAIConfigInput {
+  id: ID!
+  provider: String
+  model: String
+  api_key: String
+  base_url: String
+  is_enabled: Boolean
+  settings: JSON
+}
+
+input DeleteCompanyAIConfigInput {
+  id: ID!
+}
+
+type Query {
+  companyAiConfigs(company_id: ID): [CompanyAIConfig!]!
+  companyAiConfig(id: ID!): CompanyAIConfig
+}
+
+type Mutation {
+  createCompanyAIConfig(input: CreateCompanyAIConfigInput!): CompanyAIConfig!
+  updateCompanyAIConfig(input: UpdateCompanyAIConfigInput!): CompanyAIConfig!
+  deleteCompanyAIConfig(input: DeleteCompanyAIConfigInput!): Boolean!
+}
+
+scalar JSON

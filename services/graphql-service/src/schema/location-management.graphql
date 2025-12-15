@@ -1,0 +1,48 @@
+# ==================== Location Type Management ====================
+
+type LocationType {
+  id: ID!
+  name: String!
+  allowedParents: [ID!]!
+  description: String
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+}
+
+input CreateLocationTypeInput {
+  name: String!
+  allowedParents: [ID!]!
+  description: String
+}
+
+input UpdateLocationTypeInput {
+  id: ID!
+  name: String
+  allowedParents: [ID!]
+  description: String
+}
+
+input DeleteLocationTypeInput {
+  id: ID!
+}
+
+extend type Query {
+  # Get all location types
+  masterLocationTypes: [LocationType!]!
+  
+  # Get single location type
+  masterLocationType(id: ID!): LocationType
+}
+
+extend type Mutation {
+  # Create location type
+  createMasterLocationType(input: CreateLocationTypeInput!): LocationType!
+  
+  # Update location type
+  updateMasterLocationType(input: UpdateLocationTypeInput!): LocationType!
+  
+  # Delete location type
+  deleteMasterLocationType(input: DeleteLocationTypeInput!): Boolean!
+}
+

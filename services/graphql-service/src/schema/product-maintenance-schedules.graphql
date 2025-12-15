@@ -1,0 +1,67 @@
+enum ScheduleType {
+  service_reminder
+  inspection
+  tune_up
+  calibration
+}
+
+enum IntervalType {
+  days
+  weeks
+  months
+  years
+}
+
+type ProductMaintenanceSchedule {
+  id: ID!
+  productId: ID!
+  product: Product
+  scheduleType: ScheduleType
+  intervalValue: Int
+  intervalUnit: IntervalType
+  maintenanceTasks: JSON
+  requiredParts: JSON
+  isMandatory: Boolean!
+  isActive: Boolean!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateProductMaintenanceScheduleInput {
+  productId: ID!
+  scheduleType: ScheduleType
+  intervalValue: Int
+  intervalUnit: IntervalType
+  maintenanceTasks: JSON
+  requiredParts: JSON
+  isMandatory: Boolean = false
+  isActive: Boolean = true
+}
+
+input UpdateProductMaintenanceScheduleInput {
+  id: ID!
+  productId: ID
+  scheduleType: ScheduleType
+  intervalValue: Int
+  intervalUnit: IntervalType
+  maintenanceTasks: JSON
+  requiredParts: JSON
+  isMandatory: Boolean
+  isActive: Boolean
+}
+
+input DeleteProductMaintenanceScheduleInput {
+  id: ID!
+}
+
+extend type Query {
+  productMaintenanceSchedules(productId: ID): [ProductMaintenanceSchedule!]!
+  productMaintenanceSchedule(id: ID!): ProductMaintenanceSchedule
+}
+
+extend type Mutation {
+  createProductMaintenanceSchedule(input: CreateProductMaintenanceScheduleInput!): ProductMaintenanceSchedule!
+  updateProductMaintenanceSchedule(input: UpdateProductMaintenanceScheduleInput!): ProductMaintenanceSchedule!
+  deleteProductMaintenanceSchedule(input: DeleteProductMaintenanceScheduleInput!): Boolean!
+}
+

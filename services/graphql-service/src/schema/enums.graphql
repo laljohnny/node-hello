@@ -1,0 +1,43 @@
+# ==================== Enum Management ====================
+
+type EnumType {
+  name: String!
+  schema: String!
+  values: [String!]!
+}
+
+type EnumValue {
+  value: String!
+  sortOrder: Int!
+}
+
+type EnumTypeDetail {
+  enumName: String!
+  schema: String!
+  companyId: String
+  values: [String!]!
+}
+
+type EnumsResponse {
+  companyId: String
+  schema: String!
+  enums: [EnumType!]!
+}
+
+type AllEnumsResponse {
+  enums: [EnumType!]!
+}
+
+# ==================== Queries ====================
+
+extend type Query {
+  # Get enums based on authenticated user's company/schema
+  getEnums: EnumsResponse!
+  
+  # Get enum values by name (from user's schema or public)
+  getEnumByName(enumName: String!): EnumTypeDetail!
+  
+  # Get all enums from all schemas (super_admin only)
+  getAllEnums: AllEnumsResponse!
+}
+

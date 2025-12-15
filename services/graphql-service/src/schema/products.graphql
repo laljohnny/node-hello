@@ -1,0 +1,108 @@
+enum LifecycleStatus {
+  active
+  limited_support
+  end_of_sale
+  end_of_support
+  obsolete
+  decommissioned
+}
+
+enum ManufacturerStatus {
+  operational
+  discontinued
+  eol
+}
+
+type Product {
+  id: ID!
+  parentId: ID
+  parent: Product
+  children: [Product!]!
+  categoryId: ID!
+  category: ProductCategory
+  typeId: ID!
+  type: ProductType
+  manufacturerId: ID!
+  manufacturer: MasterManufacturer
+  successorId: ID
+  successor: Product
+  predecessorId: ID
+  predecessor: Product
+  name: String!
+  make: String
+  model: String
+  serialNumber: String
+  dataSheet: String
+  lifespan: Float
+  rating: Float
+  specifications: JSON
+  images: JSON
+  description: String
+  lifecycleStatus: LifecycleStatus
+  manufacturerStatus: ManufacturerStatus
+  isActive: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+input CreateProductInput {
+  parentId: ID
+  categoryId: ID!
+  typeId: ID!
+  manufacturerId: ID!
+  successorId: ID
+  predecessorId: ID
+  name: String!
+  make: String
+  model: String
+  serialNumber: String
+  dataSheet: String
+  lifespan: Float
+  rating: Float
+  specifications: JSON
+  images: JSON
+  description: String
+  lifecycleStatus: LifecycleStatus
+  manufacturerStatus: ManufacturerStatus
+  isActive: Boolean = true
+}
+
+input UpdateProductInput {
+  id: ID!
+  parentId: ID
+  categoryId: ID
+  typeId: ID
+  manufacturerId: ID
+  successorId: ID
+  predecessorId: ID
+  name: String
+  make: String
+  model: String
+  serialNumber: String
+  dataSheet: String
+  lifespan: Float
+  rating: Float
+  specifications: JSON
+  images: JSON
+  description: String
+  lifecycleStatus: LifecycleStatus
+  manufacturerStatus: ManufacturerStatus
+  isActive: Boolean
+}
+
+input DeleteProductInput {
+  id: ID!
+}
+
+extend type Query {
+  products(categoryId: ID, typeId: ID, manufacturerId: ID): [Product!]!
+  product(id: ID!): Product
+}
+
+extend type Mutation {
+  createProduct(input: CreateProductInput!): Product!
+  updateProduct(input: UpdateProductInput!): Product!
+  deleteProduct(input: DeleteProductInput!): Boolean!
+}
+

@@ -1,0 +1,82 @@
+scalar JSON
+
+# ==================== Maintenance Schedule Types ====================
+
+type MaintenanceSchedule {
+  id: ID!
+  assetId: ID!
+  asset: Asset
+  assetPartIds: [ID!]!
+  assetParts: [AssetPart!]
+  title: String!
+  description: String
+  startDate: String!
+  nextDueDate: String
+  timeZone: String!
+  assignedToUserIds: [ID!]!
+  assignedToUsers: [User!]!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+}
+
+# ==================== Input Types ====================
+
+input MaintenanceScheduleItemInput {
+  assetPartIds: [ID!]
+  title: String!
+  description: String
+  startDate: String!
+  nextDueDate: String
+  timezone: String
+  assignedToUserIds: [ID!]
+}
+
+input CreateMaintenanceSchedulesInput {
+  maintenanceSchedules: [MaintenanceScheduleItemInput!]!
+}
+
+input UpdateMaintenanceScheduleItemInput {
+  id: ID!
+  assetPartIds: [ID!]
+  title: String
+  description: String
+  startDate: String
+  nextDueDate: String
+  timezone: String
+  assignedToUserIds: [ID!]
+}
+
+input UpdateMaintenanceSchedulesInput {
+  maintenanceSchedules: [UpdateMaintenanceScheduleItemInput!]!
+}
+
+input MaintenanceScheduleFilterInput {
+  assetId: ID
+  assignedToUserId: ID
+  frequency: String
+  searchTerm: String
+}
+
+# ==================== Queries ====================
+
+type Query {
+  # Get all maintenance schedules with optional filtering
+  maintenanceSchedules(filter: MaintenanceScheduleFilterInput, limit: Int, offset: Int): [MaintenanceSchedule!]!
+  
+  # Get maintenance schedules by asset ID
+  maintenanceSchedule(assetId: ID!): [MaintenanceSchedule!]!
+}
+
+# ==================== Mutations ====================
+
+type Mutation {
+  # Create multiple maintenance schedules for a specific asset
+  createMaintenanceSchedules(assetId: ID!, input: CreateMaintenanceSchedulesInput!): [MaintenanceSchedule!]!
+  
+  # Update multiple maintenance schedules for a specific asset
+  updateMaintenanceSchedules(assetId: ID!, input: UpdateMaintenanceSchedulesInput!): [MaintenanceSchedule!]!
+  
+  # Delete maintenance schedule by asset ID and schedule ID (soft delete)
+  deleteMaintenanceSchedules(assetId: ID!, maintenanceScheduleId: ID!): Boolean!
+}
